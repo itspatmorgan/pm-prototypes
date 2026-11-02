@@ -11,6 +11,7 @@ Website began as Design Studio's Marketing starter and was renamed and rebuilt f
 - **Fonts:** Geist and Geist Mono as packages; Geist Pixel Square as `assets/fonts/GeistPixel-Square.woff2`.
 - **Images:** the `debut` card textures, used by the `.texture-bg` class.
 - **Button:** the site's shadcn base-nova button (`src/components/ui/button.tsx`).
+- **Site shell:** `PageLayout.astro` with the Sidebar, Header, MobileNav, PageHeader, and Footer, rewritten in React. Links render through a `renderLink` prop so prototypes can navigate between their own pages; the theme toggle flips the theme boundary rather than `<html>`.
 - **Lab page:** the frame from `src/layouts/LabLayout.astro`, without the site sidebar and footer.
 - **Pixel wave text:** `src/components/PixelWaveText.astro` and `src/scripts/pixel-wave.ts`, rewritten in React; the helpers return cleanup functions.
 - **Logo:** the four-pixel mark and its hover interactions (`src/components/layout/Logo.astro`, rewritten in React).

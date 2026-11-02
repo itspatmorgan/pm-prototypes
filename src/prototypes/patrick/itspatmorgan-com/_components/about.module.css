@@ -1,0 +1,8 @@
+/* The phone photo row scrolls sideways without a visible scrollbar, as on the site. */
+.carousel {
+  scroll-padding-inline: 1.5rem;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
