@@ -10,8 +10,9 @@ itspatmorgan.com, the sibling checkout at `~/Developer/itspatmorgan.com` (commit
 ## Decisions
 
 - Marketing was renamed to Website and rebuilt from the site; its sample prototype, Design Studio Marketing, was deleted at Patrick's request.
+- Website is the studio's default and only system. The Product starter, Parker's sample prototypes and profile, and the archived Lab prototypes were deleted on 2026-11-01; git history keeps them.
 - Tokens are copied exactly from the site. Utility steps are limited to those the site uses.
-- The Lab experiments (Pattern Engine, Pixel Mark, Pixel Wave) are views in the itspatmorgan.com prototype's `lab/`, inside the site shell as on the site. They began as separate prototypes, now archived in `src/prototypes/patrick/`, and moved in on 2026-11-01 so the whole site is one workspace.
+- The Lab experiments (Pattern Engine, Pixel Mark, Pixel Wave) are views in the itspatmorgan.com prototype's `lab/`, inside the site shell as on the site. They began as separate prototypes and moved in on 2026-11-01 so the whole site is one workspace.
 - The site's pages share one prototype, itspatmorgan.com, one view per page, on the `SiteShell` component. About and Work are built, with real content.
 - Work's case study cards show each case study's share card where the site shows its live opening demo, until the demos are ported.
 

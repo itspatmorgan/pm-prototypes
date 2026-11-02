@@ -50,7 +50,6 @@ function declarations(root) {
   for (const file of [
     'src/platform/modules/onboarding/module.ts',
     'src/platform/systems/studio/system.ts',
-    'src/systems/product/system.ts',
     'src/systems/website/system.ts',
   ]) {
     fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
