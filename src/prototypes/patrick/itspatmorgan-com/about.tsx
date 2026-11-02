@@ -1,5 +1,6 @@
 /** @studio-id 5pr5zp2m6xkp1b30 */
 import { PageHeader } from '@/systems/website/components/site-shell';
+import { PrintPhoto } from '@/systems/website/components/print-photo';
 import { Shell, inlineLink } from './_components/Shell';
 import livingRoom from './assets/about/profile-living-room.jpg';
 import dinner from './assets/about/personal-dinner.jpg';
@@ -10,12 +11,11 @@ import styles from './_components/about.module.css';
 
 // Recreates itspatmorgan.com/about (src/pages/about.astro), reading template.
 const photos = [
-  { src: livingRoom, alt: 'Patrick sitting in a living room.', tilt: 'rotate-[-1.5deg]', mobileTilt: 'rotate-[-1.5deg]', offset: '' },
-  { src: dinner, alt: 'Patrick smiling at an outdoor dinner.', tilt: 'rotate-[1deg]', mobileTilt: 'rotate-[1deg]', offset: 'lg:mt-10' },
-  { src: hollywood, alt: 'Patrick near the Hollywood sign.', tilt: 'rotate-[-1deg]', mobileTilt: 'rotate-[-1deg]', offset: 'lg:mt-3' },
-  { src: airport, alt: 'Patrick in an airport while traveling.', tilt: 'rotate-[1.5deg]', mobileTilt: 'rotate-[1.5deg]', offset: 'lg:mt-12' },
+  { src: livingRoom, alt: 'Patrick sitting in a living room.', tilt: 'rotate-[-1.5deg]', offset: '' },
+  { src: dinner, alt: 'Patrick smiling at an outdoor dinner.', tilt: 'rotate-[1deg]', offset: 'lg:mt-10' },
+  { src: hollywood, alt: 'Patrick near the Hollywood sign.', tilt: 'rotate-[-1deg]', offset: 'lg:mt-3' },
+  { src: airport, alt: 'Patrick in an airport while traveling.', tilt: 'rotate-[1.5deg]', offset: 'lg:mt-12' },
 ];
-const print = 'bg-white p-2 pb-7 shadow-xl shadow-black/15 dark:bg-[#20201e] dark:shadow-black/40';
 
 export default function About() {
   return (
@@ -33,20 +33,12 @@ export default function About() {
       <section className="pb-16">
         <div className={`${styles.carousel} flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 md:hidden`} aria-label="Personal photos">
           {photos.map(photo => (
-            <figure key={photo.alt} className={`w-[min(78vw,20rem)] shrink-0 snap-center ${photo.mobileTilt} ${print}`}>
-              <div className="aspect-square overflow-hidden bg-muted">
-                <img src={photo.src} alt={photo.alt} className="h-full w-full object-cover" />
-              </div>
-            </figure>
+            <PrintPhoto key={photo.alt} src={photo.src} alt={photo.alt} tilt={photo.tilt} className="w-[min(78vw,20rem)] shrink-0 snap-center" />
           ))}
         </div>
         <div className="mx-auto hidden max-w-5xl items-start gap-5 px-6 md:grid md:grid-cols-2 lg:grid-cols-4">
           {photos.map(photo => (
-            <figure key={photo.alt} className={`${photo.tilt} ${print} ${photo.offset} transition-transform duration-300 hover:scale-[1.02] hover:rotate-0`}>
-              <div className="aspect-square overflow-hidden bg-muted">
-                <img src={photo.src} alt={photo.alt} className="h-full w-full object-cover" />
-              </div>
-            </figure>
+            <PrintPhoto key={photo.alt} src={photo.src} alt={photo.alt} tilt={photo.tilt} className={photo.offset} />
           ))}
         </div>
       </section>

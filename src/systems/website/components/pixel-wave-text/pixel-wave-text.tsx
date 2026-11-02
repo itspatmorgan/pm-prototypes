@@ -125,4 +125,22 @@ function enablePixelHover(container: HTMLElement) {
   };
 }
 
-export { PixelWaveText, dissolvePixelWave, pixelWave, enablePixelHover, type PixelWaveTextProps };
+/** Put every character back in pixel type, ready to replay a wave. */
+function resetPixelWave(container: HTMLElement) {
+  container.querySelectorAll<HTMLElement>('[data-pw-char]').forEach(wrapper => {
+    const pixel = wrapper.querySelector<HTMLElement>('[data-pw-pixel]');
+    const sans = wrapper.querySelector<HTMLElement>('[data-pw-sans]');
+    if (!pixel || !sans) return;
+    sans.style.opacity = '0';
+    pixel.style.opacity = '1';
+    pixel.textContent = sans.textContent;
+  });
+}
+
+/** Show every character in sans type at once. */
+function resolvePixelWave(container: HTMLElement) {
+  container.querySelectorAll<HTMLElement>('[data-pw-pixel]').forEach(el => (el.style.opacity = '0'));
+  container.querySelectorAll<HTMLElement>('[data-pw-sans]').forEach(el => (el.style.opacity = '1'));
+}
+
+export { PixelWaveText, dissolvePixelWave, pixelWave, enablePixelHover, resetPixelWave, resolvePixelWave, type PixelWaveTextProps };

@@ -1,0 +1,28 @@
+import asset0 from '../../assets/images/site/studio-case/launch-post.jpg';
+// Media features: where Patrick's work was seen outside his day job. The Design Studio case study and the Work page's Media section both
+// list them, the case study as cards and the Work page as rows; the Design Studio landing page shows the interview, the lesson and the article.
+export type MediaFeature = { image: string; alt: string; fallback: string; title: string; sub: string; href: string; kind?: "article" };
+export const mediaFeatures: MediaFeature[] = [
+  {
+    image: "https://i.ytimg.com/vi/628c4YuxAEM/maxresdefault.jpg", alt: "Dive Club episode cover: building an agent-agnostic prototyping platform",
+    fallback: "Dive Club", title: "Dive Club interview", sub: "Podcast · Aug 2026",
+    href: "https://www.youtube.com/watch?v=628c4YuxAEM",
+  },
+  {
+    image: "https://d2426xcxuh3ht5.cloudfront.net/f9OPHTgQSIKMI3CQ7KfX_Duo%20Instructor%20-%20theme%20a.jpg", alt: "Maven lesson cover: Build your own AI design sandbox, with Patrick Morgan and Xinran Ma",
+    fallback: "Maven", title: "Maven Lightning Lesson", sub: "With Xinran Ma · 600+ registered",
+    href: "https://maven.com/p/0e87f2/build-your-own-ai-design-sandbox",
+  },
+  {
+    image: asset0, alt: "The launch video: a coding agent beside the open-source Design Studio, with the Feedback Inbox handoff canvas open",
+    fallback: "X", title: "Design Studio open-source launch", sub: "30k+ views on X and LinkedIn",
+    href: "https://x.com/itspatmorgan/status/2114742504738443277",
+  },
+  {
+    // Xinran Ma's interview write-up on her newsletter, Design with AI (Oct 31, 2026), with its own cover image.
+    image: "https://substackcdn.com/image/fetch/$s_!U9Xk!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F486da4eb-32cf-4981-92f0-3a13033f8f53_1350x1080.jpeg",
+    alt: "Cover of Xinran Ma's Design with AI article on Design Studio", kind: "article",
+    fallback: "Design with AI", title: "Design with AI article", sub: "By Xinran Ma · Oct 2026",
+    href: "https://designwithai.substack.com/p/design-studio",
+  },
+];

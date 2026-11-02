@@ -120,6 +120,14 @@
     ".claude/skills/studio-module-systems-setup-design-system": {
       "kind": "link",
       "hash": "bd6ea023e7ec6524fa7dbacaebaa986fba3493ecce4d0e1083ff4cc275a36a4a"
+    },
+    ".agents/skills/studio-system-website-sync-from-site/SKILL.md": {
+      "kind": "file",
+      "hash": "eb9a7aa0febb4220c357417bde206a8fcfd40f1d31772c94094dbc32fb84a720"
+    },
+    ".claude/skills/studio-system-website-sync-from-site": {
+      "kind": "link",
+      "hash": "f6d3fb669945400a45fc07ea7d0cd748ae2a3d603fe758379592861fb0241a32"
     }
   }
 }

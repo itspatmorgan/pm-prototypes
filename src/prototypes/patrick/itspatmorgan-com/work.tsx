@@ -1,25 +1,26 @@
 /** @studio-id gyyeb4xfc7b5880n */
 import { PageHeader } from '@/systems/website/components/site-shell';
+import { ProjectCard } from '@/systems/website/components/project-card';
+import { MediaRow } from '@/systems/website/components/media-row';
 import { Shell } from './_components/Shell';
-import { projects, roles, toolkit, writingAndTalks, type Project } from './_components/work-data';
+import { roles, toolkit } from './_components/work-data';
+import { projects } from './_data/projects';
+import { mediaFeatures } from './_data/community';
+import { unknownArtsBanner } from './_data/images';
 
 // Recreates itspatmorgan.com/work (src/pages/work/index.astro), reading template.
-const cardHover = 'transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/5 dark:hover:shadow-black/20';
-
-function ProjectCard({ project }: { project: Project }) {
-  return (
-    <a href={`https://itspatmorgan.com/work/${project.slug}`} className="group flex h-full flex-col">
-      <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-md group-hover:shadow-black/5 dark:group-hover:shadow-black/20">
-        <div className="texture-bg shrink-0 overflow-hidden">
-          <img src={project.image} alt={project.title} className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
-        </div>
-        <div className="flex flex-1 flex-col items-start p-4">
-          <h3 className="line-clamp-2 text-base leading-snug font-medium tracking-tight">{project.title}</h3>
-        </div>
-      </article>
-    </a>
-  );
-}
+// The newsletter first, Patrick's numbers as of 2026-10-30, then the talks. The launch post stays in the Design Studio case study only.
+const writingAndTalks = [
+  {
+    image: unknownArtsBanner,
+    alt: 'Unknown Arts collage: a figure on a mountain ridge pointing toward a bird in flight',
+    fallback: 'Unknown Arts',
+    title: 'Unknown Arts newsletter',
+    sub: '200+ essays · 7,700+ subscribers · 800k views',
+    href: 'https://www.unknownarts.com',
+  },
+  ...mediaFeatures.filter(item => item.title !== 'Design Studio open-source launch'),
+];
 
 export default function Work() {
   return (
@@ -31,7 +32,7 @@ export default function Work() {
         <div className="relative">
           <div className="absolute top-2 bottom-0 left-[5px] w-px bg-border" />
           {roles.map(role => {
-            const roleProjects = (role.projects ?? []).map(slug => projects[slug]).filter(Boolean);
+            const roleProjects = (role.projects ?? []).flatMap(slug => projects.filter(p => p.id === slug));
             return (
               <div key={role.company} className="relative mb-14 pl-8 last:mb-0">
                 <div className="absolute top-[5px] left-0 size-3 rounded-full border border-border bg-background" />
@@ -46,7 +47,7 @@ export default function Work() {
                 {roleProjects.length > 0 && (
                   <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {roleProjects.map(project => (
-                      <ProjectCard key={project.slug} project={project} />
+                      <ProjectCard key={project.id} slug={project.id} title={project.title} image={project.image} />
                     ))}
                   </div>
                 )}
@@ -61,21 +62,7 @@ export default function Work() {
         <ul className="grid gap-3">
           {writingAndTalks.map(item => (
             <li key={item.title}>
-              <a href={item.href} target="_blank" rel="noopener noreferrer" className={`group/media flex items-center gap-4 rounded-xl border border-border bg-card p-3 sm:gap-5 ${cardHover}`}>
-                <span className="relative aspect-video w-28 shrink-0 overflow-hidden rounded-lg bg-muted sm:w-40">
-                  <span className="absolute inset-0 grid place-items-center text-sm font-medium text-muted-foreground" aria-hidden="true">
-                    {item.fallback}
-                  </span>
-                  <img src={item.image} alt={item.alt} loading="lazy" onError={event => event.currentTarget.remove()} className="relative h-full w-full object-cover" />
-                </span>
-                <span className="flex min-w-0 flex-col gap-0.5">
-                  <span className="text-base font-semibold tracking-tight">{item.title}</span>
-                  <span className="text-sm text-muted-foreground">{item.sub}</span>
-                </span>
-                <span className="ml-auto pr-2 text-muted-foreground transition-colors group-hover/media:text-foreground" aria-hidden="true">
-                  ↗
-                </span>
-              </a>
+              <MediaRow {...item} />
             </li>
           ))}
         </ul>

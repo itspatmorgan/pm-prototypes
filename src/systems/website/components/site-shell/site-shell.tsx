@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
   ArrowUpRight01Icon,
@@ -21,32 +21,39 @@ import { Logo } from '../logo';
 // The itspatmorgan.com shell, ported from src/layouts/PageLayout.astro and src/components/layout/
 // (Sidebar, Header, MobileNav, PageHeader, Footer). Sidebar styles live in styles/theme.css.
 
-type NavKey = 'home' | 'about' | 'work' | 'design-studio' | 'writing' | 'lab' | 'community' | 'colophon';
-type SiteLinkProps = { to: NavKey; className?: string; children: ReactNode; title?: string; 'aria-label'?: string; onClick?: () => void };
-/** Renders a link to a site page. Prototypes pass their own, using Link from @module/prototypes. */
+type NavKey = 'home' | 'about' | 'work' | 'design-studio' | 'writing' | 'lab' | 'community';
+type SiteLinkProps = {
+  /** A site path such as "/work/expansion", or a full URL. */
+  href: string;
+  className?: string;
+  children?: ReactNode;
+  title?: string;
+  target?: string;
+  rel?: string;
+  'aria-label'?: string;
+  onClick?: () => void;
+};
+/** Renders a link to a site path. Prototypes pass their own through SiteShell, using Link from @module/prototypes. */
 type RenderSiteLink = (props: SiteLinkProps) => ReactNode;
 
 const SITE = 'https://itspatmorgan.com';
-const siteHref: Record<NavKey, string> = {
-  home: '/',
-  about: '/about',
-  work: '/work',
-  'design-studio': '/design-studio',
-  writing: '/writing',
-  lab: '/lab',
-  community: '/community',
-  colophon: '/colophon',
-};
-const defaultLink: RenderSiteLink = ({ to, ...props }) => <a href={SITE + siteHref[to]} {...props} />;
+const liveSiteLink: RenderSiteLink = ({ href, ...props }) => <a href={href.startsWith('/') ? SITE + href : href} {...props} />;
+const SiteLinkContext = createContext<RenderSiteLink>(liveSiteLink);
 
-const navItems: { key: NavKey; label: string; icon: typeof Home01Icon }[] = [
-  { key: 'home', label: 'Home', icon: Home01Icon },
-  { key: 'about', label: 'About', icon: UserIcon },
-  { key: 'work', label: 'Work', icon: Briefcase01Icon },
-  { key: 'design-studio', label: 'Design Studio', icon: CanvasIcon },
-  { key: 'writing', label: 'Writing', icon: Pen01Icon },
-  { key: 'lab', label: 'Lab', icon: TestTube01Icon },
-  { key: 'community', label: 'Community', icon: UserGroupIcon },
+/** A link to a site page. Inside SiteShell it follows the prototype's own pages; elsewhere it opens the live site. */
+function SiteLink(props: SiteLinkProps) {
+  const render = useContext(SiteLinkContext);
+  return <>{/^https?:|^mailto:/.test(props.href) ? <a {...props} /> : render(props)}</>;
+}
+
+const navItems: { key: NavKey; href: string; label: string; icon: typeof Home01Icon }[] = [
+  { key: 'home', href: '/', label: 'Home', icon: Home01Icon },
+  { key: 'about', href: '/about', label: 'About', icon: UserIcon },
+  { key: 'work', href: '/work', label: 'Work', icon: Briefcase01Icon },
+  { key: 'design-studio', href: '/design-studio', label: 'Design Studio', icon: CanvasIcon },
+  { key: 'writing', href: '/writing', label: 'Writing', icon: Pen01Icon },
+  { key: 'lab', href: '/lab', label: 'Lab', icon: TestTube01Icon },
+  { key: 'community', href: '/community', label: 'Community', icon: UserGroupIcon },
 ];
 
 const social = {
@@ -107,7 +114,7 @@ function ThemeToggle({ className, size = 18 }: { className?: string; size?: numb
   );
 }
 
-function Sidebar({ current, renderLink }: { current?: NavKey; renderLink: RenderSiteLink }) {
+function Sidebar({ current }: { current?: NavKey }) {
   const [collapsed, setCollapsed] = useState(() => {
     try {
       return (localStorage.getItem('sidebar-collapsed') ?? 'true') === 'true';
@@ -158,8 +165,8 @@ function Sidebar({ current, renderLink }: { current?: NavKey; renderLink: Render
         <ul className="flex flex-col gap-0.5">
           {navItems.map(item => (
             <li key={item.key}>
-              {renderLink({
-                to: item.key,
+              <SiteLink {...{
+                href: item.href,
                 title: item.label,
                 className: cn(
                   'nav-item flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors duration-200',
@@ -171,7 +178,7 @@ function Sidebar({ current, renderLink }: { current?: NavKey; renderLink: Render
                     <span className="nav-text overflow-hidden whitespace-nowrap">{item.label}</span>
                   </>
                 ),
-              })}
+              }} />
             </li>
           ))}
         </ul>
@@ -232,11 +239,11 @@ function Sidebar({ current, renderLink }: { current?: NavKey; renderLink: Render
   );
 }
 
-function MobileHeader({ renderLink, onOpenNav }: { renderLink: RenderSiteLink; onOpenNav: () => void }) {
+function MobileHeader({ onOpenNav }: { onOpenNav: () => void }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-sm md:hidden">
       <div className="flex h-14 items-center justify-between px-4">
-        {renderLink({ to: 'home', 'aria-label': 'Home', className: 'block', children: <Logo /> })}
+        <SiteLink {...{ href: '/', 'aria-label': 'Home', className: 'block', children: <Logo /> }} />
         <div className="flex items-center gap-1">
           <ThemeToggle size={16} className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground" />
           <button type="button" onClick={onOpenNav} aria-label="Open navigation" className="flex h-8 w-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground">
@@ -248,12 +255,12 @@ function MobileHeader({ renderLink, onOpenNav }: { renderLink: RenderSiteLink; o
   );
 }
 
-function MobileNav({ open, onClose, renderLink }: { open: boolean; onClose: () => void; renderLink: RenderSiteLink }) {
+function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   if (!open) return null;
   return (
     <div className="site-mobile-nav fixed inset-0 z-[100] flex flex-col bg-background md:hidden" role="dialog" aria-modal="true" aria-label="Navigation">
       <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-4">
-        {renderLink({ to: 'home', 'aria-label': 'Home', className: 'block', onClick: onClose, children: <Logo /> })}
+        <SiteLink {...{ href: '/', 'aria-label': 'Home', className: 'block', onClick: onClose, children: <Logo /> }} />
         <button type="button" onClick={onClose} aria-label="Close navigation" className="flex h-9 w-9 items-center justify-center text-muted-foreground transition-colors hover:text-foreground">
           <HugeiconsIcon icon={Cancel01Icon} size={20} />
         </button>
@@ -262,12 +269,12 @@ function MobileNav({ open, onClose, renderLink }: { open: boolean; onClose: () =
         <ul className="flex flex-col">
           {navItems.map(item => (
             <li key={item.key}>
-              {renderLink({
-                to: item.key,
+              <SiteLink {...{
+                href: item.href,
                 onClick: onClose,
                 className: 'block border-b border-border/50 py-3 text-[1.65rem] leading-tight font-medium text-muted-foreground transition-colors last:border-0 hover:text-foreground active:text-foreground',
                 children: item.label,
-              })}
+              }} />
             </li>
           ))}
         </ul>
@@ -290,12 +297,12 @@ function MobileNav({ open, onClose, renderLink }: { open: boolean; onClose: () =
 
 type Template = 'showcase' | 'reading';
 
-function SiteFooter({ template, renderLink }: { template: Template; renderLink: RenderSiteLink }) {
+function SiteFooter({ template }: { template: Template }) {
   const time = useLocalTime();
   return (
     <footer className="py-8 sm:py-10">
       <div className={cn('mx-auto flex w-full items-center justify-between', template === 'showcase' ? 'max-w-[1136px] px-6 sm:px-8 lg:px-14' : 'max-w-3xl px-6')}>
-        {renderLink({ to: 'colophon', className: 'text-xs text-muted-foreground/70 transition-colors hover:text-foreground', children: 'Colophon' })}
+        <SiteLink {...{ href: '/colophon', className: 'text-xs text-muted-foreground/70 transition-colors hover:text-foreground', children: 'Colophon' }} />
         <div className="flex items-center gap-3 text-xs whitespace-nowrap text-muted-foreground/60">
           <span>&copy; {new Date().getFullYear()}</span>
           <span className="font-mono text-xs whitespace-nowrap text-muted-foreground tabular-nums md:hidden">LA&nbsp;&middot;&nbsp;{time}</span>
@@ -315,20 +322,22 @@ type SiteShellProps = {
 };
 
 /** The site frame: sidebar on desktop, header and full-screen nav on phones, and the footer. */
-function SiteShell({ current, template = 'reading', renderLink = defaultLink, children }: SiteShellProps) {
+function SiteShell({ current, template = 'reading', renderLink = liveSiteLink, children }: SiteShellProps) {
   const [navOpen, setNavOpen] = useState(false);
   return (
-    <div className="site-shell min-h-dvh bg-background text-foreground">
-      <MobileHeader renderLink={renderLink} onOpenNav={() => setNavOpen(true)} />
-      <MobileNav open={navOpen} onClose={() => setNavOpen(false)} renderLink={renderLink} />
-      <div className="md:flex md:min-h-dvh">
-        <Sidebar current={current} renderLink={renderLink} />
-        <div className="flex min-w-0 flex-1 flex-col">
-          <main className="flex-1">{children}</main>
-          <SiteFooter template={template} renderLink={renderLink} />
+    <SiteLinkContext.Provider value={renderLink}>
+      <div className="site-shell min-h-dvh bg-background text-foreground">
+        <MobileHeader onOpenNav={() => setNavOpen(true)} />
+        <MobileNav open={navOpen} onClose={() => setNavOpen(false)} />
+        <div className="md:flex md:min-h-dvh">
+          <Sidebar current={current} />
+          <div className="flex min-w-0 flex-1 flex-col">
+            <main className="flex-1">{children}</main>
+            <SiteFooter template={template} />
+          </div>
         </div>
       </div>
-    </div>
+    </SiteLinkContext.Provider>
   );
 }
 
@@ -343,4 +352,4 @@ function PageHeader({ title, lead, className, children }: { title: ReactNode; le
   );
 }
 
-export { SiteShell, PageHeader, social, type NavKey, type RenderSiteLink, type SiteLinkProps, type SiteShellProps };
+export { SiteShell, SiteLink, PageHeader, social, type NavKey, type RenderSiteLink, type SiteLinkProps, type SiteShellProps };

@@ -1,0 +1,177 @@
+/* Home-only styles, ported from the <style> block in itspatmorgan.com's index.astro. Dark variants key off data-dark,
+   which the page sets from useDark, in place of the site's html.dark. */
+
+/* A faint dot field behind the hero, on phones behind the photo and on desktop around it. */
+.heroMobile {
+  position: relative;
+  isolation: isolate;
+}
+.heroMobile::before {
+  content: '';
+  position: absolute;
+  width: calc(100% + 3rem);
+  height: 15.5rem;
+  left: -1.5rem;
+  top: -0.75rem;
+  z-index: 0;
+  background-image: radial-gradient(currentColor 1px, transparent 1.5px);
+  background-size: 14px 14px;
+  color: var(--foreground);
+  opacity: 0.095;
+  mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 88%);
+}
+.heroMobile[data-dark='true']::before {
+  opacity: 0.1;
+}
+.heroMobile > * {
+  position: relative;
+  z-index: 1;
+}
+.photoField {
+  position: relative;
+  min-height: 12rem;
+  padding-top: 2.25rem;
+}
+
+.heroDesktop {
+  position: relative;
+  isolation: isolate;
+}
+.heroDesktop > * {
+  position: relative;
+  z-index: 1;
+}
+.heroDesktop::before {
+  content: '';
+  display: none;
+}
+@media (min-width: 48rem) {
+  .heroDesktop::before {
+    position: absolute;
+    display: block;
+    width: min(34rem, 40vw);
+    height: 26rem;
+    left: 80%;
+    top: 53%;
+    z-index: 0;
+    transform: translate(-50%, -50%) rotate(1deg);
+    background-image: radial-gradient(currentColor 1px, transparent 1.5px);
+    background-size: 14px 14px;
+    color: var(--foreground);
+    opacity: 0.105;
+    mask-image: radial-gradient(ellipse at 55% 54%, black 0%, black 52%, transparent 82%);
+  }
+}
+.heroDesktop[data-dark='true']::before {
+  opacity: 0.11;
+}
+
+/* The portrait's "builder mode": a three-second develop effect when the photo is clicked. */
+.builderGrid {
+  background-image:
+    linear-gradient(rgba(244, 238, 231, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 238, 231, 0.08) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+.builderScanlines {
+  background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0, rgba(0, 0, 0, 0.22) 1px, transparent 1px, transparent 4px);
+  background-size: 100% 4px;
+}
+.builderSweep {
+  background: linear-gradient(90deg, transparent, rgba(244, 238, 231, 0.12), rgba(129, 230, 217, 0.18), transparent);
+  mix-blend-mode: screen;
+}
+.builder[aria-pressed='true'] .builderGrid {
+  animation: gridDrift 3s linear both;
+}
+.builder[aria-pressed='true'] .builderScanlines {
+  animation: scanDrift 1s linear 3;
+}
+.builder[aria-pressed='true'] .builderSweep {
+  animation: sweep 3s ease-in-out both;
+}
+.builder[aria-pressed='true'] .builderReadout {
+  animation: pulse 1s ease-in-out 3;
+}
+@keyframes gridDrift {
+  to {
+    background-position: 56px 28px, 56px 28px;
+  }
+}
+@keyframes scanDrift {
+  to {
+    background-position: 0 16px;
+  }
+}
+@keyframes sweep {
+  0%,
+  20% {
+    transform: translateX(0);
+  }
+  70%,
+  100% {
+    transform: translateX(320%);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .builder[aria-pressed='true'] .builderGrid,
+  .builder[aria-pressed='true'] .builderScanlines,
+  .builder[aria-pressed='true'] .builderSweep,
+  .builder[aria-pressed='true'] .builderReadout {
+    animation: none;
+  }
+}
+
+/* The newsletter card, composed like an editorial page on the cover's own paper. */
+.newsletterPaper {
+  background-color: var(--card);
+  background-position: center;
+  background-size: cover;
+}
+.newsletterCollage {
+  top: -14%;
+  right: -22%;
+  height: 78%;
+  width: auto;
+  transform-origin: right top;
+  mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
+}
+.newsletterPaper[data-dark='true'] .newsletterCollage {
+  filter: brightness(0.92);
+}
+@media (min-width: 40rem) {
+  .newsletterPaper {
+    container-type: inline-size;
+  }
+  .newsletterCollage {
+    top: -17%;
+    right: auto;
+    left: 14rem;
+    height: 134%;
+    transform-origin: left center;
+    mask-image: linear-gradient(90deg, transparent 4%, #000 26%);
+  }
+  .newsletterText {
+    right: auto;
+    max-width: 16rem;
+  }
+  @container (max-width: 34rem) {
+    .newsletterCollage {
+      top: -8%;
+      left: 14.5rem;
+      height: 116%;
+    }
+    .newsletterText {
+      max-width: 14.5rem;
+    }
+  }
+}
