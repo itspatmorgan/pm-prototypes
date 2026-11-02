@@ -2,11 +2,11 @@
 import { PageHeader } from '@/systems/website/components/site-shell';
 import { ProjectCard } from '@/systems/website/components/project-card';
 import { MediaRow } from '@/systems/website/components/media-row';
-import { Shell } from './_components/Shell';
-import { roles, toolkit } from './_components/work-data';
-import { projects } from './_data/projects';
-import { mediaFeatures } from './_data/community';
-import { unknownArtsBanner } from './_data/images';
+import { Shell } from '../_components/Shell';
+import { roles, toolkit } from '../_components/work-data';
+import { projects } from '../_data/projects';
+import { mediaFeatures } from '../_data/community';
+import { unknownArtsBanner } from '../_data/images';
 
 // Recreates itspatmorgan.com/work (src/pages/work/index.astro), reading template.
 // The newsletter first, Patrick's numbers as of 2026-10-30, then the talks. The launch post stays in the Design Studio case study only.

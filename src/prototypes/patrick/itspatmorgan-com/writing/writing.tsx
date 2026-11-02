@@ -2,8 +2,8 @@
 import { useMemo, useState } from 'react';
 import { PageHeader, social } from '@/systems/website/components/site-shell';
 import { ArticleListItem } from '@/systems/website/components/article-list-item';
-import { Shell, inlineLink } from './_components/Shell';
-import { posts } from './_data/writing';
+import { Shell, inlineLink } from '../_components/Shell';
+import { posts } from '../_data/writing';
 
 // Recreates itspatmorgan.com/writing (src/pages/writing/index.astro), reading template, with its theme filter.
 const filterThemes = ['AI', 'Design', 'Systems Thinking', 'Creative Practice', 'Career'];

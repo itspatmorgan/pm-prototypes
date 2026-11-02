@@ -6,19 +6,24 @@
   "ownerContributorId": "g0t182676p1re4fm",
   "systemId": "v4576ka1mbpbqdp1",
   "order": [
+    "writing/writing.tsx",
+    "writing/article.tsx",
     "home.tsx",
     "about.tsx",
-    "work.tsx",
-    "colophon.tsx",
-    "community.tsx",
+    "work",
     "design-studio.tsx",
+    "writing",
     "lab.tsx",
+    "community.tsx",
+    "colophon.tsx",
     "meta.json",
-    "writing.tsx",
     "_components",
     "_data",
     "assets",
-    "work",
-    "writing"
+    "work/work.tsx",
+    "work/design-studio.tsx",
+    "work/expansion.tsx",
+    "work/query-language.tsx",
+    "work/sublime-agents.tsx"
   ]
 }

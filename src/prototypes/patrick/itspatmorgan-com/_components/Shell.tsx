@@ -15,7 +15,7 @@ const renderLink: RenderSiteLink = ({ href, ...props }) => {
     case '/about':
       return <Link to="about" {...props} />;
     case '/work':
-      return <Link to="work" {...props} />;
+      return <Link to="work/work" {...props} />;
     case '/work/sublime-agents':
       return <Link to="work/sublime-agents" {...props} />;
     case '/work/query-language':
@@ -27,7 +27,7 @@ const renderLink: RenderSiteLink = ({ href, ...props }) => {
     case '/design-studio':
       return <Link to="design-studio" {...props} />;
     case '/writing':
-      return <Link to={`writing${query ? `?${query}` : ''}`} {...props} />;
+      return query ? <Link to={`writing/writing?${query}`} {...props} /> : <Link to="writing/writing" {...props} />;
     case '/lab':
       return <Link to="lab" {...props} />;
     case '/lab/pattern-engine':
