@@ -4,6 +4,8 @@
 {
   "name": "pm-prototypes",
   "compatibility_date": "2026-10-01",
+  // Cloudflare creates the DNS record and certificate on deploy.
+  "routes": [{ "pattern": "studio.itspatmorgan.com", "custom_domain": true }],
   "assets": {
     "directory": "./dist",
     // Serve index.html (HTTP 200) for app routes such as direct prototype
