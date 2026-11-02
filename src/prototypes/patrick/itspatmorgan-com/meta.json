@@ -12,6 +12,14 @@
     "lab/pattern-engine.tsx",
     "lab/pixel-mark.tsx",
     "lab/pixel-wave.tsx",
+    "lab/labs.excalidraw",
+    "work/work.tsx",
+    "work/design-studio.tsx",
+    "work/expansion.tsx",
+    "work/query-language.tsx",
+    "work/sublime-agents.tsx",
+    "work/case-studies.excalidraw",
+    "site-pages.excalidraw",
     "home.tsx",
     "about.tsx",
     "work",
@@ -23,11 +31,6 @@
     "meta.json",
     "_components",
     "_data",
-    "assets",
-    "work/work.tsx",
-    "work/design-studio.tsx",
-    "work/expansion.tsx",
-    "work/query-language.tsx",
-    "work/sublime-agents.tsx"
+    "assets"
   ]
 }

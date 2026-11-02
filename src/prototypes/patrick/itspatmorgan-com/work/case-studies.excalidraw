@@ -1,0 +1,99 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "studioVersion": 1,
+  "studioId": "zkewhfbztzs0pmv3",
+  "elements": [
+    {
+      "autoResize": false,
+      "fontFamily": 6,
+      "fontSize": 28,
+      "height": 35,
+      "id": "mvyyn2vn2hf710",
+      "lineHeight": 1.25,
+      "originalText": "Case studies, at quarter scale",
+      "seed": 1305906973,
+      "text": "Case studies, at quarter scale",
+      "textAlign": "left",
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1267104660,
+      "verticalAlign": "top",
+      "width": 1400,
+      "x": 0,
+      "y": -60
+    },
+    {
+      "customData": {
+        "frame": true,
+        "hideLinkIcon": true
+      },
+      "height": 1762,
+      "id": "mvyyn2vpxkjx19",
+      "link": "/prototypes/y8knn3kz54v0mvyb/artifacts/3cegn0h89zan3v8g",
+      "seed": 1606297900,
+      "strokeColor": "transparent",
+      "type": "embeddable",
+      "version": 1,
+      "versionNonce": 824474376,
+      "width": 360,
+      "x": 0,
+      "y": 40
+    },
+    {
+      "customData": {
+        "frame": true,
+        "hideLinkIcon": true
+      },
+      "height": 1880,
+      "id": "mvyyn2vqd7lhmq",
+      "link": "/prototypes/y8knn3kz54v0mvyb/artifacts/8zcm0j7qhf8kya40",
+      "seed": 1515347105,
+      "strokeColor": "transparent",
+      "type": "embeddable",
+      "version": 1,
+      "versionNonce": 627370666,
+      "width": 360,
+      "x": 420,
+      "y": 40
+    },
+    {
+      "customData": {
+        "frame": true,
+        "hideLinkIcon": true
+      },
+      "height": 1840,
+      "id": "mvyyn2vrjfz14i",
+      "link": "/prototypes/y8knn3kz54v0mvyb/artifacts/k0epf20a0r8zpa1e",
+      "seed": 697385982,
+      "strokeColor": "transparent",
+      "type": "embeddable",
+      "version": 1,
+      "versionNonce": 283960857,
+      "width": 360,
+      "x": 840,
+      "y": 40
+    },
+    {
+      "customData": {
+        "frame": true,
+        "hideLinkIcon": true
+      },
+      "height": 2306,
+      "id": "mvyyn2vrif4m46",
+      "link": "/prototypes/y8knn3kz54v0mvyb/artifacts/xcpw8gbsxw48r4vh",
+      "seed": 1368690675,
+      "strokeColor": "transparent",
+      "type": "embeddable",
+      "version": 1,
+      "versionNonce": 1781781763,
+      "width": 360,
+      "x": 1260,
+      "y": 40
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

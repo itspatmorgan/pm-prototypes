@@ -1,0 +1,82 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "studioVersion": 1,
+  "studioId": "xg0vc7cqas9rvcqn",
+  "elements": [
+    {
+      "autoResize": false,
+      "fontFamily": 6,
+      "fontSize": 28,
+      "height": 35,
+      "id": "mvyyn36s135gol",
+      "lineHeight": 1.25,
+      "originalText": "Lab experiments, at quarter scale",
+      "seed": 360232491,
+      "text": "Lab experiments, at quarter scale",
+      "textAlign": "left",
+      "type": "text",
+      "version": 1,
+      "versionNonce": 56754866,
+      "verticalAlign": "top",
+      "width": 1400,
+      "x": 0,
+      "y": -60
+    },
+    {
+      "customData": {
+        "frame": true,
+        "hideLinkIcon": true
+      },
+      "height": 225,
+      "id": "mvyyn36t3aasl7",
+      "link": "/prototypes/y8knn3kz54v0mvyb/artifacts/5jhe26hn9xwqv00q",
+      "seed": 960450352,
+      "strokeColor": "transparent",
+      "type": "embeddable",
+      "version": 1,
+      "versionNonce": 718427496,
+      "width": 360,
+      "x": 0,
+      "y": 40
+    },
+    {
+      "customData": {
+        "frame": true,
+        "hideLinkIcon": true
+      },
+      "height": 638,
+      "id": "mvyyn36up5dl02",
+      "link": "/prototypes/y8knn3kz54v0mvyb/artifacts/w64qbzswk4qvj50n",
+      "seed": 1753768215,
+      "strokeColor": "transparent",
+      "type": "embeddable",
+      "version": 1,
+      "versionNonce": 970876596,
+      "width": 360,
+      "x": 420,
+      "y": 40
+    },
+    {
+      "customData": {
+        "frame": true,
+        "hideLinkIcon": true
+      },
+      "height": 268,
+      "id": "mvyyn36vaffqax",
+      "link": "/prototypes/y8knn3kz54v0mvyb/artifacts/h5rcnczvz946868v",
+      "seed": 1634125094,
+      "strokeColor": "transparent",
+      "type": "embeddable",
+      "version": 1,
+      "versionNonce": 1476072757,
+      "width": 360,
+      "x": 840,
+      "y": 40
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
