@@ -1,8 +1,11 @@
 import type { ReactNode } from 'react';
 import { Link } from '@module/prototypes';
 import { SiteShell, type NavKey, type RenderSiteLink } from '@/systems/website/components/site-shell';
+import { sampledPosts } from '../_data/writing';
 
-// Every site path resolves to a page in this prototype, one of the Lab prototypes, or the live site.
+// Every site path resolves to a page in this prototype, one of the Lab prototypes, or the live site. Only the sampled articles
+// have bodies here; the other articles open on the live site.
+const sampled = new Set(sampledPosts.map(post => post.id));
 // Keep the Link paths literal so Studio can repair them when a page is renamed.
 const renderLink: RenderSiteLink = ({ href, ...props }) => {
   const [path, query = ''] = href.split('?');
@@ -38,7 +41,8 @@ const renderLink: RenderSiteLink = ({ href, ...props }) => {
     case '/colophon':
       return <Link to="colophon" {...props} />;
   }
-  if (path.startsWith('/writing/')) return <Link to={`writing/article?article=${path.slice('/writing/'.length)}`} {...props} />;
+  if (path.startsWith('/writing/') && sampled.has(path.slice('/writing/'.length)))
+    return <Link to={`writing/article?article=${path.slice('/writing/'.length)}`} {...props} />;
   return <a href={`https://itspatmorgan.com${href}`} {...props} />;
 };
 

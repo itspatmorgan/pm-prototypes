@@ -9,7 +9,7 @@ The source is the itspatmorgan.com checkout beside this studio (`../itspatmorgan
 
 ## Content
 
-Run `node scripts/sync-from-site/snapshot.mjs`. It rewrites `src/prototypes/patrick/itspatmorgan-com/_data/` from the site's content collections and `src/data/`: projects and case study copy, articles (bodies rendered with remark-gfm), Lab entries, community, commendations, media, the Design Studio agent guide, and the images they use, copied into the prototype's `assets/site/`.
+Run `node scripts/sync-from-site/snapshot.mjs`. It rewrites `src/prototypes/patrick/itspatmorgan-com/_data/` from the site's content collections and `src/data/`: projects and case study copy, articles (every listing, with bodies rendered by remark-gfm only for the `ARTICLE_SAMPLE` list in the script), Lab entries, community, commendations, media, the Design Studio agent guide, and the images they use, copied into the prototype's `assets/site/`.
 
 The `_data/` modules are generated; edit the script, not its output. Words a page writes inline (About, Colophon, Design Studio) are not synced: compare them with the site's page by hand.
 

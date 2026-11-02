@@ -5,10 +5,10 @@ import { SiteLink } from '@/systems/website/components/site-shell';
 import { Badge } from '@/systems/website/components/badge';
 import { LiveEditorialVisual } from '@/systems/website/components/generative-art';
 import { Shell } from '../_components/Shell';
-import { posts, type Post } from '../_data/writing';
+import { sampledPosts, type Post } from '../_data/writing';
 
-// The article template (src/layouts/WritingLayout.astro), reading template. One view shows every article: links from the
-// Writing list carry ?article=<id>, and the picker switches articles here.
+// The article template (src/layouts/WritingLayout.astro), reading template, shown with a representative sample of articles.
+// Links from the Writing list carry ?article=<id>, and the picker switches between the sampled articles here.
 
 const generatorLabel = (type: string) => type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 function visualCaption(visual: NonNullable<Post['visual']>) {
@@ -35,12 +35,12 @@ function requestedArticle() {
 }
 
 export default function Article() {
-  const [id, setId] = useState(posts[0].id);
+  const [id, setId] = useState(sampledPosts[0].id);
   useEffect(() => {
     const requested = requestedArticle();
-    if (requested && posts.some(post => post.id === requested)) setId(requested);
+    if (requested && sampledPosts.some(post => post.id === requested)) setId(requested);
   }, []);
-  const post = posts.find(p => p.id === id) ?? posts[0];
+  const post = sampledPosts.find(p => p.id === id) ?? sampledPosts[0];
   const date = new Date(post.publishedDate).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' });
 
   return (
@@ -52,9 +52,9 @@ export default function Article() {
             Writing
           </SiteLink>
           <label className="flex min-w-0 items-center gap-2 font-mono text-xs text-muted-foreground">
-            <span className="shrink-0">Article</span>
+            <span className="shrink-0">Sample</span>
             <select value={post.id} onChange={event => setId(event.target.value)} className="min-w-0 truncate rounded-md border border-border bg-background px-2 py-1 text-xs text-foreground">
-              {posts.map(p => (
+              {sampledPosts.map(p => (
                 <option key={p.id} value={p.id}>
                   {p.title}
                 </option>
@@ -95,7 +95,7 @@ export default function Article() {
           </figure>
         )}
 
-        <div className="site-prose" dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div className="site-prose" dangerouslySetInnerHTML={{ __html: post.html ?? '' }} />
       </article>
     </Shell>
   );

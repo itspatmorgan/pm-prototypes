@@ -4,5 +4,21 @@
   "created": "2026-11-01",
   "studioId": "y8knn3kz54v0mvyb",
   "ownerContributorId": "g0t182676p1re4fm",
-  "systemId": "v4576ka1mbpbqdp1"
+  "systemId": "v4576ka1mbpbqdp1",
+  "order": [
+    "home.tsx",
+    "about.tsx",
+    "work.tsx",
+    "colophon.tsx",
+    "community.tsx",
+    "design-studio.tsx",
+    "lab.tsx",
+    "meta.json",
+    "writing.tsx",
+    "_components",
+    "_data",
+    "assets",
+    "work",
+    "writing"
+  ]
 }
