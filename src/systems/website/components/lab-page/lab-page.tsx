@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '#studio/runtime';
+import { SiteLink } from '../site-shell';
 
 // A Lab experiment page, ported from itspatmorgan.com's src/layouts/LabLayout.astro:
 // "← Lab", the title and description, optional intro prose, then the experiment.
@@ -8,20 +9,19 @@ type LabPageProps = {
   description: string;
   /** Words that introduce the experiment, rendered as prose under the description. */
   intro?: ReactNode;
-  backHref?: string;
   children?: ReactNode;
 };
 
-function LabPage({ title, description, intro, backHref = 'https://itspatmorgan.com/lab', children }: LabPageProps) {
+function LabPage({ title, description, intro, children }: LabPageProps) {
   return (
-    <div className="min-h-dvh bg-background text-foreground">
+    <div className="bg-background text-foreground">
       <section className="mx-auto max-w-3xl px-6 pt-12 pb-12 sm:pt-24">
-        <a href={backHref} className="mb-8 inline-flex items-center gap-1 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground">
+        <SiteLink href="/lab" className="mb-8 inline-flex items-center gap-1 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground">
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
           Lab
-        </a>
+        </SiteLink>
         <h1 className="mb-4 text-4xl font-medium tracking-tight sm:text-5xl">{title}</h1>
         <p className={cn('max-w-xl text-lg text-muted-foreground', intro && 'mb-8')}>{description}</p>
         {intro && <div className="site-prose">{intro}</div>}

@@ -6,6 +6,6 @@ source: Ported from itspatmorgan.com's src/layouts/LabLayout.astro, without the 
 
 ## When to use
 
-Wrap each Lab prototype in `LabPage` with the title and description from its Lab entry. Put the entry's introduction in `intro`, and the experiment in children. Use `LabSection` for each titled part of the demo, with an optional `description`.
+Inside `SiteShell`, wrap each Lab page in `LabPage` with the title and description from its Lab entry. Put the entry's introduction in `intro`, and the experiment in children. Use `LabSection` for each titled part of the demo, with an optional `description`.
 
-The site's sidebar, mobile header, and footer are not part of this component yet.
+The "← Lab" link is a `SiteLink` to `/lab`, so it follows the prototype's own pages. The sidebar, header, and footer come from `SiteShell`.

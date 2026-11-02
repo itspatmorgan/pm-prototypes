@@ -3,7 +3,7 @@ import { Link } from '@module/prototypes';
 import { SiteShell, type NavKey, type RenderSiteLink } from '@/systems/website/components/site-shell';
 import { sampledPosts } from '../_data/writing';
 
-// Every site path resolves to a page in this prototype, one of the Lab prototypes, or the live site. Only the sampled articles
+// Every site path resolves to a page in this prototype or the live site. Only the sampled articles
 // have bodies here; the other articles open on the live site.
 const sampled = new Set(sampledPosts.map(post => post.id));
 // Keep the Link paths literal so Studio can repair them when a page is renamed.
@@ -29,13 +29,13 @@ const renderLink: RenderSiteLink = ({ href, ...props }) => {
     case '/writing':
       return query ? <Link to={`writing/writing?${query}`} {...props} /> : <Link to="writing/writing" {...props} />;
     case '/lab':
-      return <Link to="lab" {...props} />;
+      return <Link to="lab/lab" {...props} />;
     case '/lab/pattern-engine':
-      return <Link to="/prototypes/prccfdcxs1smnep1" {...props} />;
+      return <Link to="lab/pattern-engine" {...props} />;
     case '/lab/pixel-mark':
-      return <Link to="/prototypes/782dx8ckfkn6wpgj" {...props} />;
+      return <Link to="lab/pixel-mark" {...props} />;
     case '/lab/pixel-wave':
-      return <Link to="/prototypes/hwj33bs61za8ewhq" {...props} />;
+      return <Link to="lab/pixel-wave" {...props} />;
     case '/community':
       return <Link to="community" {...props} />;
     case '/colophon':
@@ -46,9 +46,9 @@ const renderLink: RenderSiteLink = ({ href, ...props }) => {
   return <a href={`https://itspatmorgan.com${href}`} {...props} />;
 };
 
-export function Shell({ current, template, children }: { current?: NavKey; template?: 'showcase' | 'reading'; children: ReactNode }) {
+export function Shell({ current, template, footer, children }: { current?: NavKey; template?: 'showcase' | 'reading'; footer?: boolean; children: ReactNode }) {
   return (
-    <SiteShell current={current} template={template} renderLink={renderLink}>
+    <SiteShell current={current} template={template} footer={footer} renderLink={renderLink}>
       {children}
     </SiteShell>
   );

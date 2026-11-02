@@ -16,7 +16,7 @@ Website began as Design Studio's Marketing starter and was renamed and rebuilt f
 - **Pixel wave text:** `src/components/PixelWaveText.astro` and `src/scripts/pixel-wave.ts`, rewritten in React; the helpers return cleanup functions.
 - **Logo:** the four-pixel mark and its hover interactions (`src/components/layout/Logo.astro`, rewritten in React).
 - **Shared site pieces:** Badge, Print photo, Project card (with each case study's live visual), Lab card (with live previews), Article list item, Kind words, Section header, and Media row, extracted from the site's pages and components.
-- **Generative art:** the Pattern Engine's deterministic generators, `LiveEditorialVisual`, `GenerativePatternSurface`, `ArtCanvas`, and `UAMark` (`src/lab/editorial-art/`). Pattern Engine, the Lab prototype, keeps only its editor UI.
+- **Generative art:** the Pattern Engine's deterministic generators, `LiveEditorialVisual`, `GenerativePatternSurface`, `ArtCanvas`, and `UAMark` (`src/lab/editorial-art/`). Pattern Engine keeps only its editor UI, in the itspatmorgan.com prototype.
 - **Theme hooks:** `useDark`, `useReduced`, and `usePhone` (`src/lib/hooks.ts`).
 - **Case study scenes and demos:** the scene player and stages (`case-study`), and the Sublime, query builder, expansion, Design Studio, and Studio case demos, each folder with its stylesheet in `styles/site/`. `CaseStudyPage` and `Slide` port `CaseStudyLayout.astro` and `Slide.astro`.
 - **Design Studio landing styles:** `styles/site/ds-landing.css`, from the `<style>` block of `src/pages/design-studio.astro`.

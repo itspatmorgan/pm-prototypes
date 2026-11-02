@@ -318,11 +318,13 @@ type SiteShellProps = {
   /** showcase: 1024px of content in a 1136px shell. reading: the 720px column. Sets the footer width. */
   template?: Template;
   renderLink?: RenderSiteLink;
+  /** false leaves out the footer, for full-height tools such as Pattern Engine. */
+  footer?: boolean;
   children: ReactNode;
 };
 
 /** The site frame: sidebar on desktop, header and full-screen nav on phones, and the footer. */
-function SiteShell({ current, template = 'reading', renderLink = liveSiteLink, children }: SiteShellProps) {
+function SiteShell({ current, template = 'reading', renderLink = liveSiteLink, footer = true, children }: SiteShellProps) {
   const [navOpen, setNavOpen] = useState(false);
   return (
     <SiteLinkContext.Provider value={renderLink}>
@@ -333,7 +335,7 @@ function SiteShell({ current, template = 'reading', renderLink = liveSiteLink, c
           <Sidebar current={current} />
           <div className="flex min-w-0 flex-1 flex-col">
             <main className="flex-1">{children}</main>
-            <SiteFooter template={template} />
+            {footer && <SiteFooter template={template} />}
           </div>
         </div>
       </div>

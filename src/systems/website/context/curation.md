@@ -11,11 +11,11 @@ itspatmorgan.com, the sibling checkout at `~/Developer/itspatmorgan.com` (commit
 
 - Marketing was renamed to Website and rebuilt from the site; its sample prototype, Design Studio Marketing, was deleted at Patrick's request.
 - Tokens are copied exactly from the site. Utility steps are limited to those the site uses.
-- Each published Lab experiment is its own prototype in `src/prototypes/patrick/`: Pattern Engine, Pixel Mark, and Pixel Wave.
+- The Lab experiments (Pattern Engine, Pixel Mark, Pixel Wave) are views in the itspatmorgan.com prototype's `lab/`, inside the site shell as on the site. They began as separate prototypes, now archived in `src/prototypes/patrick/`, and moved in on 2026-11-01 so the whole site is one workspace.
 - The site's pages share one prototype, itspatmorgan.com, one view per page, on the `SiteShell` component. About and Work are built, with real content.
 - Work's case study cards show each case study's share card where the site shows its live opening demo, until the demos are ported.
 
-- Every page of the site has a view in the itspatmorgan.com prototype: Home, About, Work, the four case studies, Design Studio, Writing (all 27 articles listed) and one article template shown with a five-article sample covering every hero generator, theme, and prose pattern, Lab (linking to the three Lab prototypes), Community, and Colophon. Content is a snapshot made by [sync-from-site](../skills/sync-from-site/SKILL.md).
+- Every page of the site has a view in the itspatmorgan.com prototype: Home, About, Work, the four case studies, Design Studio, Writing (all 27 articles listed) and one article template shown with a five-article sample covering every hero generator, theme, and prose pattern, Lab and its three experiments, Community, and Colophon. Content is a snapshot made by [sync-from-site](../skills/sync-from-site/SKILL.md).
 - Project cards show each case study's live opening demo, as on the site.
 
 ## Next

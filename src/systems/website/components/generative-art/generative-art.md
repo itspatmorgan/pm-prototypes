@@ -10,4 +10,4 @@ Use `LiveEditorialVisual` for an article's hero, passing the article's `visual` 
 
 Every pattern is deterministic: the same generator settings and seed always draw the same image. Five generators are available: flow field, dot grid, isoline, Voronoi, and strange attractor. Motion modes are static, reveal, and ambient, and all respect reduced motion.
 
-Pattern Engine, the Lab prototype, is the editor for these settings.
+Pattern Engine, the Lab view in the itspatmorgan.com prototype, is the editor for these settings.

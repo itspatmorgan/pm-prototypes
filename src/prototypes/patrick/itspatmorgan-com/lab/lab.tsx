@@ -1,8 +1,8 @@
 /** @studio-id 9ybp1tbz8ywz1apa */
 import { PageHeader } from '@/systems/website/components/site-shell';
 import { LabCard } from '@/systems/website/components/lab-card';
-import { Shell } from './_components/Shell';
-import { labPageOrder } from './_data/lab';
+import { Shell } from '../_components/Shell';
+import { labPageOrder } from '../_data/lab';
 
 // Recreates itspatmorgan.com/lab (src/pages/lab/index.astro), reading template. Each card opens its Lab prototype.
 export default function Lab() {
