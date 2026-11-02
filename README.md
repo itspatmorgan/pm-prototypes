@@ -1,9 +1,5 @@
 <a href="https://itspatmorgan.com/design-studio">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="public/images/design-studio-social-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="public/images/design-studio-social.png">
-    <img src="public/images/design-studio-social.png" alt="Design Studio — Design with intent. Build with an agent. Design Studio is an open source, AI prototype sandbox for designers and product managers who build.">
-  </picture>
+  <img src="public/images/design-studio-readme-share.jpg" alt="Design Studio — Design with intent. Build with an agent. Design Studio is an open source, AI prototype sandbox for designers and product managers who build.">
 </a>
 
 # Design Studio
@@ -46,7 +42,7 @@ Install Design Studio in a `design-studio` folder on your computer, then open th
 
 The [installation guide](src/platform/context/installing.md) provides one set of steps you can run yourself or ask your agent to carry out:
 
-> Install Design Studio from release v0.1.2 using https://github.com/itspatmorgan/design-studio/blob/v0.1.2/src/platform/context/installing.md. Use the repository installation guide without a plugin installer. Help me choose a folder, preserve existing files, and verify the running preview. Then help me open the Design Studio folder in my agent harness.
+> Install Design Studio from release v0.1.3 using https://github.com/itspatmorgan/design-studio/blob/v0.1.3/src/platform/context/installing.md. Use the repository installation guide without a plugin installer. Help me choose a folder, preserve existing files, and verify the running preview. Then help me open the Design Studio folder in my agent harness.
 
 Once the folder is open, ask:
 
