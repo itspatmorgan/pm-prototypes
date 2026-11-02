@@ -32,6 +32,7 @@ Website began as Design Studio's Marketing starter and was renamed and rebuilt f
 - The site's button drops its `dark:` overrides here, because Studio's dark tokens already supply those values.
 
 - The site's global component stylesheets became files under `styles/site/`, imported by `styles/theme.css` and scoped to `.website-theme`. Sibling selectors (`a + b`) are wrapped as `:is(a + b)`, which selects the same elements, because Studio's scope check accepts only descendant and child combinators after the theme class.
+- `system.ts` declares `origin: null`: credit comes from the libraries list instead. shadcn/ui is credited on Button, Badge, Tabs, and Tooltip, and itspatmorgan.com on everything ported from the site. Add a new component's slug to the right library's `components`.
 - Internal component files start with `_`, so the Systems pages list one documented entry per folder; each folder's `index.ts` is its public surface.
 - `useDark` follows the theme boundary's `data-color-mode`, not `.dark` on `<html>`. The generative art and Lab previews use it.
 - `ArtCanvas` imports its paper textures from `assets/images/` instead of the site's `/images/textures/` URLs.

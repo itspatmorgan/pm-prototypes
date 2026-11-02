@@ -21,8 +21,17 @@ export default {
       "kind": "source",
       "id": "shadcn",
       "label": "shadcn/ui",
-      "description": "Component source and styles, as vendored by itspatmorgan.com",
-      "docs": "https://ui.shadcn.com/docs"
+      "description": "Button and Badge, via itspatmorgan.com's copies, and the Tabs and Tooltip kept from the starter",
+      "docs": "https://ui.shadcn.com/docs",
+      "components": ["button", "badge", "tabs", "tooltip"]
+    },
+    {
+      "kind": "source",
+      "id": "itspatmorgan-com",
+      "label": "itspatmorgan.com",
+      "description": "The site's own components, demos, and styles, ported from its repository",
+      "docs": "https://github.com/itspatmorgan/itspatmorgan.com",
+      "components": ["site-shell", "button", "badge", "logo", "lab-page", "pixel-wave-text", "generative-art", "theme-hooks", "print-photo", "project-card", "lab-card", "article-list-item", "kind-words", "section-header", "media-row", "case-study", "sublime", "query-builder", "expansion", "design-studio", "studio-case"]
     },
     {
       "kind": "package",
@@ -85,7 +94,7 @@ export default {
       ]
     }
   ],
-  origin: 'shadcn',
+  origin: null,
   studioId: "v4576ka1mbpbqdp1",
   renameReview: [],
 } satisfies SystemSpec;
