@@ -95,7 +95,7 @@ export default function Article() {
           </figure>
         )}
 
-        <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div className="site-prose" dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>
     </Shell>
   );

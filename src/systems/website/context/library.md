@@ -21,7 +21,7 @@ Website began as Design Studio's Marketing starter and was renamed and rebuilt f
 - **Case study scenes and demos:** the scene player and stages (`case-study`), and the Sublime, query builder, expansion, Design Studio, and Studio case demos, each folder with its stylesheet in `styles/site/`. `CaseStudyPage` and `Slide` port `CaseStudyLayout.astro` and `Slide.astro`.
 - **Design Studio landing styles:** `styles/site/ds-landing.css`, from the `<style>` block of `src/pages/design-studio.astro`.
 - **Tabs and Tooltip:** kept from the Marketing starter and restyled by the new tokens. The site has no equivalent yet.
-- **Prose:** the site's `.prose` rules, rewritten as plain CSS under the theme class.
+- **Prose:** the site's `.prose` rules, rewritten as plain CSS under the theme class and renamed `.site-prose`, because Studio's Tailwind setup generates @tailwindcss/typography styles for any system using the class name `prose`.
 - **Libraries:** Hugeicons (`libraries/icons`), Motion (`libraries/motion`), and html-to-image (`libraries/html-to-image`). IBM Plex Mono and Comic Neue are package fonts for the expansion and Studio case demos.
 
 ## Adaptations

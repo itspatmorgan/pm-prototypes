@@ -24,7 +24,7 @@ function LabPage({ title, description, intro, backHref = 'https://itspatmorgan.c
         </a>
         <h1 className="mb-4 text-4xl font-medium tracking-tight sm:text-5xl">{title}</h1>
         <p className={cn('max-w-xl text-lg text-muted-foreground', intro && 'mb-8')}>{description}</p>
-        {intro && <div className="prose">{intro}</div>}
+        {intro && <div className="site-prose">{intro}</div>}
       </section>
       {children}
     </div>

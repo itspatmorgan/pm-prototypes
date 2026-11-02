@@ -25,5 +25,5 @@ Source: `agents/principles/design.md` and `agents/context/styling.md` in itspatm
 - Use the `--motion-*` tokens instead of hand-written curves: travel and arrival for demos, ease-out for entrances, ease-out-quick for quick responses, ease-standard for small state changes.
 - Section dividers use `border-t border-border`.
 - Page widths: reading content is `max-w-3xl` with `px-6`; prose is limited to 65ch.
-- Markdown prose uses the `.prose` class in the theme, not a typography plugin.
+- Markdown prose uses the theme's `.site-prose` class (the site's `.prose` rules), not a typography plugin. Never use the class name `prose`: Studio's Tailwind setup turns it into @tailwindcss/typography styles.
 - No "hire me" or availability language. Never invent metrics, quotes, or dates.

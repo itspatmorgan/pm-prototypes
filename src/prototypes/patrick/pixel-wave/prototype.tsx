@@ -68,7 +68,7 @@ export default function PixelWave() {
               </svg>
             </button>
           </div>
-          <div className="prose mb-6">
+          <div className="site-prose mb-6">
             <p>
               Pixel Wave explores text interactions built from Geist Pixel and Geist Sans. In this demo, each character starts in a pixel typeface,
               cycles through a few glyphs, then settles into Geist Sans.
