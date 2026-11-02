@@ -2,7 +2,6 @@
 // Workers Builds runs `pnpm build`, then `npx wrangler deploy` uploads dist/.
 // See src/platform/context/publishing.md for the hosting requirements this meets.
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "pm-prototypes",
   "compatibility_date": "2026-10-01",
   "assets": {
