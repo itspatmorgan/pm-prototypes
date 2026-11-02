@@ -1,0 +1,14 @@
+// Cloudflare Workers static-assets deployment for this studio.
+// Workers Builds runs `pnpm build`, then `npx wrangler deploy` uploads dist/.
+// See src/platform/context/publishing.md for the hosting requirements this meets.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pm-prototypes",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html (HTTP 200) for app routes such as direct prototype
+    // links. Missing asset requests still return 404 instead of HTML.
+    "not_found_handling": "single-page-application"
+  }
+}
