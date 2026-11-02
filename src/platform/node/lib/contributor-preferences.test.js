@@ -51,7 +51,7 @@ function declarations(root) {
     'src/platform/modules/onboarding/module.ts',
     'src/platform/systems/studio/system.ts',
     'src/systems/product/system.ts',
-    'src/systems/marketing/system.ts',
+    'src/systems/website/system.ts',
   ]) {
     fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
     fs.copyFileSync(file, path.join(root, file));

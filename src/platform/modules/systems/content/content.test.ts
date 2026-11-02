@@ -327,7 +327,7 @@ test('document routes follow repository-relative links without crossing system s
     agents: 'Read [entry](context/entry.md).',
     context: {
       'entry.md':
-        'Read [detail](src/systems/product/context/detail.md) and [other](src/systems/marketing/context/other.md).',
+        'Read [detail](src/systems/product/context/detail.md) and [other](src/systems/website/context/other.md).',
       'detail.md': '# Detail',
       'other.md': '# Product other',
     },

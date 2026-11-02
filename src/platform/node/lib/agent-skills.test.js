@@ -13,7 +13,7 @@ function fixture(t) {
     fs.writeFileSync(path.join(root, file), text);
   };
   const owners = knowledgeOwners([{ id: 'canvas', label: 'Canvas' }], {
-    marketing: { label: 'Marketing', dir: 'src/systems/marketing/' },
+    marketing: { label: 'Marketing', dir: 'src/systems/website/' },
   });
   for (const owner of owners) {
     write(
