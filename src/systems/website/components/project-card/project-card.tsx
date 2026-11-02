@@ -56,7 +56,8 @@ function ProjectCard({ slug, title, description, skills = [], image, variant = '
 
   if (variant === 'full') {
     return (
-      <SiteLink href={href} className="group block">
+      <div className="group relative block" data-project-card>
+        <SiteLink href={href} className="absolute inset-0 z-10 rounded-xl" aria-label={title} />
         <article className="overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:shadow-black/5 dark:group-hover:shadow-black/20">
           <div className={cn('flex flex-col', index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row')}>
             <div className="texture-bg relative aspect-video overflow-hidden md:w-[40%]">
@@ -75,7 +76,7 @@ function ProjectCard({ slug, title, description, skills = [], image, variant = '
             </div>
           </div>
         </article>
-      </SiteLink>
+      </div>
     );
   }
 
@@ -92,6 +93,7 @@ function ProjectCard({ slug, title, description, skills = [], image, variant = '
   );
 
   // A live demo can hold links of its own, and a link can't sit inside another, so that card is a box with its link stretched over it.
+  // data-project-card marks the box whose hover replays the visual (ProjectCardStage listens on it).
   return live ? (
     <div className="group relative flex h-full flex-col" data-project-card>
       <SiteLink href={href} className="absolute inset-0 z-10 rounded-xl" aria-label={title} />

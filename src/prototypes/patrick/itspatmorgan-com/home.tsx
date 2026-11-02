@@ -92,7 +92,8 @@ function BuilderPortrait() {
 function StudioHomeModule() {
   const studio = project('design-studio');
   return (
-    <div className="group relative">
+    // data-project-card: hovering the card replays its visual (ProjectCardStage listens on this ancestor).
+    <div className="group relative" data-project-card>
       <SiteLink href="/work/design-studio" className="absolute inset-0 z-10 rounded-xl" aria-label={studio.title} />
       <article className="grid overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-md group-hover:shadow-black/5 motion-reduce:translate-y-0 motion-reduce:transition-none lg:grid-cols-[1fr_2fr] dark:group-hover:shadow-black/20">
         <div className="order-2 flex flex-col justify-center gap-4 p-4 lg:order-1 lg:p-8">
