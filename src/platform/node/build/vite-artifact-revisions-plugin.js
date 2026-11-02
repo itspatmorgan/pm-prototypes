@@ -73,7 +73,12 @@ export default function artifactRevisions() {
         order: 'pre',
         handler(code, id) {
           const file = id.split('?')[0];
-          if (!supported(file) || /[?&](?:raw|url)(?:&|$)/.test(id)) return null;
+          if (/[?&](?:raw|url)(?:&|$)/.test(id)) return null;
+          // Imported assets (images, fonts) compile to a URL module; record the file's own bytes, as sourceInputs does.
+          if (!supported(file)) {
+            if (local(file) && fs.existsSync(file)) inputs.set(id, [pairOf(file)]);
+            return null;
+          }
           const extra = file.endsWith('.css') ? [...cssInputs(file, code)].filter(input => input !== file) : [];
           if (file === STYLES)
             for (const theme of themeFiles()) {
