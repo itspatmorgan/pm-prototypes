@@ -1,9 +1,9 @@
 {
   "$schema": "./src/platform/core/studio.config.schema.json",
   "formatVersion": 1,
-  "name": "Design Studio",
+  "name": "PM Prototypes",
   "usage": "personal",
-  "tagline": "A prototype sandbox for you and your team",
+  "tagline": "Patrick's personal prototype sandbox",
   "modules": {
     "canvas": true,
     "diagrams": true,
