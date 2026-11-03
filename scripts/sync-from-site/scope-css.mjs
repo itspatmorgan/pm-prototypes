@@ -64,7 +64,8 @@ root.walkRules(rule => {
 
 root.walkDecls(decl => {
   if (/^(animation|animation-name)$/.test(decl.prop))
-    for (const [from, to] of frames) decl.value = decl.value.replace(new RegExp(`(^|[\\s,])${from}(?=$|[\\s,])`, 'g'), `$1${to}`);
+    for (const [from, to] of frames)
+      decl.value = decl.value.replace(new RegExp(`(^|[\\s,])${from}(?=$|[\\s,])`, 'g'), `$1${to}`);
   if (decl.value.includes('url(')) {
     // A url() into the site's node_modules can't resolve from the system; copy that file into assets/ and point at it by hand.
     if (decl.value.includes('node_modules/')) console.warn(`${input}: ${decl.value.slice(0, 120)} needs a local asset`);
@@ -72,5 +73,9 @@ root.walkDecls(decl => {
 });
 
 fs.mkdirSync(path.dirname(output), { recursive: true });
-fs.writeFileSync(output, `/* Ported from itspatmorgan.com's ${path.relative(path.resolve(input, '../../..'), input)}, scoped to the Website theme. */\n` + root.toString());
+fs.writeFileSync(
+  output,
+  `/* Ported from itspatmorgan.com's ${path.relative(path.resolve(input, '../../..'), input)}, scoped to the Website theme. */\n` +
+    root.toString(),
+);
 console.log(`${output}: ${frames.size} keyframes renamed`);

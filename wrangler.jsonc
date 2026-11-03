@@ -1,0 +1,15 @@
+// Cloudflare Workers static-assets deployment for this studio.
+// Workers Builds runs `pnpm build`, then `npx wrangler deploy` uploads dist/.
+// See src/platform/context/publishing.md for the hosting requirements this meets.
+{
+  "name": "pm-prototypes",
+  "compatibility_date": "2026-10-01",
+  // Cloudflare creates the DNS record and certificate on deploy.
+  "routes": [{ "pattern": "studio.itspatmorgan.com", "custom_domain": true }],
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html (HTTP 200) for app routes such as direct prototype
+    // links. Missing asset requests still return 404 instead of HTML.
+    "not_found_handling": "single-page-application"
+  }
+}
