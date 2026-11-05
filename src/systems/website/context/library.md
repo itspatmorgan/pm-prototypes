@@ -7,7 +7,7 @@ Website began as Design Studio's Marketing starter and was renamed and rebuilt f
 
 ## Included
 
-- **Theme:** colors, radius, and motion tokens copied from the site's `src/styles/global.css`, in light and dark. Type sizes, spacing, and widths are Tailwind's defaults, limited to the steps the site and its labs use.
+- **Theme:** colors, the base radius, and motion tokens, copied into `styles/theme.css` from the kit's `tokens.css` (the file the site imports) by `scripts/sync-from-site/tokens.mjs`, in light and dark. They are copied rather than imported because the Systems pages read tokens from the declarations in `theme.css`. Type sizes, spacing, and widths are Tailwind's defaults, limited to the steps the site and its labs use.
 - **Fonts:** Geist and Geist Mono as packages; Geist Pixel Square as `assets/fonts/GeistPixel-Square.woff2`.
 - **Images:** the `debut` card textures, used by the `.texture-bg` class.
 - **Button:** the site's shadcn base-nova button (`src/components/ui/button.tsx`).

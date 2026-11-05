@@ -1,4 +1,5 @@
-/* itspatmorgan.com tokens, ported from the site's src/styles/global.css. Keep values in sync with the site. */
+/* itspatmorgan.com tokens. Colors, the base radius and motion come from the shared kit's tokens.css: run
+   node scripts/sync-from-site/tokens.mjs after moving the kit pin, rather than editing those values here. */
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 /* Case study scenes and product demos, ported from the site's component stylesheets (styles/site/). */
