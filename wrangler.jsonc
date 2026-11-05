@@ -11,5 +11,7 @@
     // Serve index.html (HTTP 200) for app routes such as direct prototype
     // links. Missing asset requests still return 404 instead of HTML.
     "not_found_handling": "single-page-application"
-  }
+  },
+  // Lets Workers Builds give each pull request a preview (`wrangler preview`). Empty: previews reuse the settings above.
+  "previews": {}
 }
