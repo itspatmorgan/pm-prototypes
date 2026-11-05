@@ -1,7 +1,7 @@
 ---
 title: Expansion demos
 description: Recreated Signal Sciences interfaces for the expansion case study and its project card.
-source: Ported from itspatmorgan.com's src/components/expansion/; styles in styles/site/.
+source: From @itspatmorgan/kit (itspatmorgan.com's packages/kit/src/expansion/), the same files the site renders.
 ---
 
 ## When to use
