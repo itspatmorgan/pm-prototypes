@@ -17,12 +17,16 @@ Website began as Design Studio's Marketing starter and was renamed and rebuilt f
 - **Logo:** the four-pixel mark and its hover interactions (`src/components/layout/Logo.astro`, rewritten in React).
 - **Shared site pieces:** Badge, Print photo, Project card (with each case study's live visual), Lab card (with live previews), Article list item, Kind words, Section header, and Media row, extracted from the site's pages and components.
 - **Generative art:** the Pattern Engine's deterministic generators, `LiveEditorialVisual`, `GenerativePatternSurface`, `ArtCanvas`, and `UAMark` (`src/lab/editorial-art/`). Pattern Engine keeps only its editor UI, in the itspatmorgan.com prototype.
-- **Theme hooks:** `useDark`, `useReduced`, and `usePhone` (`src/lib/hooks.ts`).
+- **Theme hooks:** `useDark`, `useReduced`, and `usePhone`, imported from `@itspatmorgan/kit` (see below).
 - **Case study scenes and demos:** the scene player and stages (`case-study`), and the Sublime, query builder, expansion, Design Studio, and Studio case demos, each folder with its stylesheet in `styles/site/`. `CaseStudyPage` and `Slide` port `CaseStudyLayout.astro` and `Slide.astro`.
 - **Design Studio landing styles:** `styles/site/ds-landing.css`, from the `<style>` block of `src/pages/design-studio.astro`.
 - **Tabs and Tooltip:** kept from the Marketing starter and restyled by the new tokens. The site has no equivalent yet.
 - **Prose:** the site's `.prose` rules, rewritten as plain CSS under the theme class and renamed `.site-prose`, because Studio's Tailwind setup generates @tailwindcss/typography styles for any system using the class name `prose`.
 - **Libraries:** Hugeicons (`libraries/icons`), Motion (`libraries/motion`), and html-to-image (`libraries/html-to-image`). IBM Plex Mono and Comic Neue are package fonts for the expansion and Studio case demos.
+
+## Shared kit
+
+The scene player and stages (`case-study`), the Sublime demos, and the theme hooks are not copies: they come from `@itspatmorgan/kit`, a package in the site's repository (`packages/kit`) that the site imports too. The system depends on it at a pinned commit in `package.json`; `styles/theme.css` imports its Studio stylesheets (`@itspatmorgan/kit/studio/*.css`), which the kit generates already scoped to `.website-theme`. To take a site change, move the pin to the new commit and run `pnpm install`. The folders still listed above as ported move into the kit one at a time, and their port steps go away with them.
 
 ## Adaptations
 

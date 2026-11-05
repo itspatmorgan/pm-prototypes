@@ -14,7 +14,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), *['..'] * 2))
 SITE = os.path.join(os.path.abspath(os.environ.get('SITE', os.path.join(ROOT, '..', 'itspatmorgan.com'))), 'src')
 SYS = os.path.join(ROOT, 'src/systems/website')
 COMP = os.path.join(SYS, 'components')
-FOLDERS = sys.argv[1:] or ['case-study', 'sublime', 'query-builder', 'expansion', 'design-studio', 'studio-case']
+FOLDERS = sys.argv[1:] or ['query-builder', 'expansion', 'design-studio', 'studio-case']
 
 def code_files(root):
     for dirpath, _, files in os.walk(root):

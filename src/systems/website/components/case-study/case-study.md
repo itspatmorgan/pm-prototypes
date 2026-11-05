@@ -1,7 +1,7 @@
 ---
 title: Case study scenes
 description: The scene player, stages, and motion behind every case study demo and project card visual.
-source: Ported from itspatmorgan.com's src/components/case-study/; styles in styles/site/.
+source: From @itspatmorgan/kit (itspatmorgan.com's packages/kit/src/case-study/); CaseStudyPage ports the site's layout.
 ---
 
 ## When to use

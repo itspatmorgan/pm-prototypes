@@ -1,7 +1,7 @@
 ---
 title: Sublime demos
 description: Recreated Sublime Security interfaces for the Sublime agents case study and its project card.
-source: Ported from itspatmorgan.com's src/components/sublime/; styles in styles/site/.
+source: From @itspatmorgan/kit (itspatmorgan.com's packages/kit/src/sublime/), the same files the site renders.
 ---
 
 ## When to use

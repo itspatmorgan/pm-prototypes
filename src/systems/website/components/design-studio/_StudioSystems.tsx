@@ -1,5 +1,5 @@
-import { NativeStage } from '../case-study/_NativeStage';
-import { DemoFrame, usePhone, useScene } from '../case-study/_scene';
+import { NativeStage } from '@itspatmorgan/kit/case-study/NativeStage';
+import { DemoFrame, usePhone, useScene } from '@itspatmorgan/kit/case-study/scene';
 import { Inbox, Overview } from './_StudioShapes';
 import { themeStyle, type Theme } from './explore/_StudioWindow';
 import { useDark } from '../theme-hooks/theme-hooks';
