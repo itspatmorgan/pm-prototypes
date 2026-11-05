@@ -1,18 +1,11 @@
 import asset0 from '../../assets/images/site/logos/cloudflare.svg';
-import asset1 from '../../assets/images/site/logos/cursor.svg';
 import asset2 from '../../assets/images/site/logos/netlify.svg';
-import asset3 from '../../assets/images/site/logos/square-chatgpt.svg';
-import asset4 from '../../assets/images/site/logos/square-claude.svg';
 import asset5 from '../../assets/images/site/logos/vercel.svg';
 export const setupGuide = 'https://github.com/itspatmorgan/design-studio/blob/v0.1.3/src/platform/context/installing.md';
 export const publishingGuide = 'https://github.com/itspatmorgan/design-studio/blob/main/src/platform/context/publishing.md';
 
-// Examples of agent harnesses, independent of the installation procedure.
-export const agentHarnesses = [
-  { title: 'Codex', logo: asset3 },
-  { title: 'Claude Code', logo: asset4 },
-  { title: 'Cursor', logo: asset1 },
-];
+// Examples of agent harnesses, from the kit with their logos (the StudioAsk scene shows them too).
+export { agentHarnesses } from '@itspatmorgan/kit/design-studio/harnesses';
 
 export const publishingHosts = [
   { title: 'Vercel', logo: asset5 },

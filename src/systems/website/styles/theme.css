@@ -7,12 +7,13 @@
 @import "@itspatmorgan/kit/studio/sublime.css";
 @import "@itspatmorgan/kit/studio/query-builder.css";
 @import "@itspatmorgan/kit/studio/expansion.css";
-@import "./site/linework.css";
-@import "./site/studio-card.css";
-@import "./site/studio-hero.css";
-@import "./site/studio-shapes.css";
-@import "./site/explore.css";
-@import "./site/studio-case.css";
+@import "@itspatmorgan/kit/studio/linework.css";
+@import "@itspatmorgan/kit/studio/studio-card.css";
+@import "@itspatmorgan/kit/studio/studio-hero.css";
+@import "@itspatmorgan/kit/studio/studio-shapes.css";
+@import "@itspatmorgan/kit/studio/explore.css";
+@import "@itspatmorgan/kit/studio/studio-case.css";
+@import "./site/studio-case-astro.css";
 @import "./site/ds-landing.css";
 @font-face {
   font-family: "Geist Pixel Square";

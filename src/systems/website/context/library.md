@@ -18,7 +18,7 @@ Website began as Design Studio's Marketing starter and was renamed and rebuilt f
 - **Shared site pieces:** Badge, Print photo, Project card (with each case study's live visual), Lab card (with live previews), Article list item, Kind words, Section header, and Media row, extracted from the site's pages and components.
 - **Generative art:** the Pattern Engine's deterministic generators, `LiveEditorialVisual`, `GenerativePatternSurface`, `ArtCanvas`, and `UAMark` (`src/lab/editorial-art/`). Pattern Engine keeps only its editor UI, in the itspatmorgan.com prototype.
 - **Theme hooks:** `useDark`, `useReduced`, and `usePhone`, imported from `@itspatmorgan/kit` (see below).
-- **Case study scenes and demos:** the scene player and stages (`case-study`), the Sublime, query builder and expansion demos (all from the kit), and the Design Studio and Studio case demos, each with its stylesheet in `styles/site/`. `CaseStudyPage` and `Slide` port `CaseStudyLayout.astro` and `Slide.astro`.
+- **Case study scenes and demos:** the scene player and stages (`case-study`), and the Sublime, query builder, expansion, Design Studio and Studio case demos, all from the kit. `CaseStudyPage` and `Slide` port `CaseStudyLayout.astro` and `Slide.astro`.
 - **Design Studio landing styles:** `styles/site/ds-landing.css`, from the `<style>` block of `src/pages/design-studio.astro`.
 - **Tabs and Tooltip:** kept from the Marketing starter and restyled by the new tokens. The site has no equivalent yet.
 - **Prose:** the site's `.prose` rules, rewritten as plain CSS under the theme class and renamed `.site-prose`, because Studio's Tailwind setup generates @tailwindcss/typography styles for any system using the class name `prose`.
@@ -26,7 +26,7 @@ Website began as Design Studio's Marketing starter and was renamed and rebuilt f
 
 ## Shared kit
 
-The scene player and stages (`case-study`), the Sublime, query builder and expansion demos, and the theme hooks are not copies: they come from `@itspatmorgan/kit`, a package in the site's repository (`packages/kit`) that the site imports too. The system depends on it at a pinned commit in `package.json`; `styles/theme.css` imports its Studio stylesheets (`@itspatmorgan/kit/studio/*.css`), which the kit generates already scoped to `.website-theme`. To take a site change, move the pin to the new commit and run `pnpm install`. The folders still listed above as ported move into the kit one at a time, and their port steps go away with them.
+The scene player and stages (`case-study`), the case study and Design Studio demos (`sublime`, `query-builder`, `expansion`, `design-studio`, `studio-case`), and the theme hooks are not copies: they come from `@itspatmorgan/kit`, a package in the site's repository (`packages/kit`) that the site imports too. The system depends on it at a pinned commit in `package.json`; `styles/theme.css` imports its Studio stylesheets (`@itspatmorgan/kit/studio/*.css`), which the kit generates already scoped to `.website-theme`. To take a site change, move the pin to the new commit and run `pnpm install`.
 
 ## Adaptations
 
@@ -40,6 +40,6 @@ The scene player and stages (`case-study`), the Sublime, query builder and expan
 - Internal component files start with `_`, so the Systems pages list one documented entry per folder; each folder's `index.ts` is its public surface.
 - `useDark` follows the theme boundary's `data-color-mode`, not `.dark` on `<html>`. The generative art and Lab previews use it.
 - `ArtCanvas` imports its paper textures from `assets/images/` instead of the site's `/images/textures/` URLs.
-- Hand repairs after porting: an unused import in `_OpenStudio.tsx` was removed for Studio's stricter TypeScript; `StudioQuote`, `StudioPress`, and `StudioLesson` were rewritten from Astro to React, with their styles appended to `styles/site/studio-case.css`.
+- `StudioQuote`, `StudioPress`, and `StudioLesson` are the site's Astro components rewritten in React, with their styles in `styles/site/studio-case-astro.css`.
 
 The shadcn MIT notice is retained in `LICENSE`.

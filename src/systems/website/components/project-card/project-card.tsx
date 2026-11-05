@@ -5,7 +5,7 @@ import { Badge } from '../badge';
 import SublimeCard from '@itspatmorgan/kit/sublime/SublimeCard';
 import QueryCard from '@itspatmorgan/kit/query-builder/QueryCard';
 import ExpansionCard from '@itspatmorgan/kit/expansion/ExpansionCard';
-import StudioCard from '../design-studio/_StudioCard';
+import StudioCard from '@itspatmorgan/kit/design-studio/StudioCard';
 
 // A case study card, ported from itspatmorgan.com's src/components/ProjectCard.astro and ProjectDemo.astro.
 // compact: the Work and Home grids, visual on top. full: a wide row with the visual beside the words.

@@ -31,16 +31,16 @@ export default {
       "label": "itspatmorgan.com",
       "description": "The site's own components, demos, and styles, ported from its repository",
       "docs": "https://github.com/itspatmorgan/itspatmorgan.com",
-      "components": ["site-shell", "button", "badge", "logo", "lab-page", "pixel-wave-text", "generative-art", "print-photo", "project-card", "lab-card", "article-list-item", "kind-words", "section-header", "media-row", "design-studio", "studio-case"]
+      "components": ["site-shell", "button", "badge", "logo", "lab-page", "pixel-wave-text", "generative-art", "print-photo", "project-card", "lab-card", "article-list-item", "kind-words", "section-header", "media-row"]
     },
     {
       "kind": "package",
       "id": "itspatmorgan-kit",
       "label": "itspatmorgan.com kit",
       "package": "@itspatmorgan/kit",
-      "description": "Code shared with the live site: theme hooks, the case study scene player, and the Sublime, query builder and Expansion demos, installed from the site's repository at a pinned commit",
+      "description": "Code shared with the live site: theme hooks, the case study scene player, and the case study and Design Studio demos, installed from the site's repository at a pinned commit",
       "docs": "https://github.com/itspatmorgan/itspatmorgan.com/tree/main/packages/kit",
-      "components": ["theme-hooks", "case-study", "sublime", "query-builder", "expansion"]
+      "components": ["theme-hooks", "case-study", "sublime", "query-builder", "expansion", "design-studio", "studio-case"]
     },
     {
       "kind": "package",
