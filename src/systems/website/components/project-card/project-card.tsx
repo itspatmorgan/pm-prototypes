@@ -3,8 +3,8 @@ import { cn } from '#studio/runtime';
 import { SiteLink } from '../site-shell';
 import { Badge } from '../badge';
 import SublimeCard from '@itspatmorgan/kit/sublime/SublimeCard';
-import QueryCard from '../query-builder/_QueryCard';
-import ExpansionCard from '../expansion/_ExpansionCard';
+import QueryCard from '@itspatmorgan/kit/query-builder/QueryCard';
+import ExpansionCard from '@itspatmorgan/kit/expansion/ExpansionCard';
 import StudioCard from '../design-studio/_StudioCard';
 
 // A case study card, ported from itspatmorgan.com's src/components/ProjectCard.astro and ProjectDemo.astro.

@@ -1,7 +1,7 @@
 ---
 title: Query builder demos
 description: Recreated JupiterOne query builder interfaces for the query language case study and its project card.
-source: Ported from itspatmorgan.com's src/components/query-builder/; styles in styles/site/.
+source: From @itspatmorgan/kit (itspatmorgan.com's packages/kit/src/query-builder/), the same files the site renders.
 ---
 
 ## When to use

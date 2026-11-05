@@ -5,8 +5,8 @@
 @import "@itspatmorgan/kit/studio/case-study.css";
 @import "@itspatmorgan/kit/studio/project-card.css";
 @import "@itspatmorgan/kit/studio/sublime.css";
-@import "./site/query-builder.css";
-@import "./site/expansion.css";
+@import "@itspatmorgan/kit/studio/query-builder.css";
+@import "@itspatmorgan/kit/studio/expansion.css";
 @import "./site/linework.css";
 @import "./site/studio-card.css";
 @import "./site/studio-hero.css";
