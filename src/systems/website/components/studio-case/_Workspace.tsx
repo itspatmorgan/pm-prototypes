@@ -1,6 +1,6 @@
 import { ArrowDown01Icon, CanvasIcon, CodeSquareIcon, LockPasswordIcon, Menu01Icon, Note01Icon, SecurityWarningIcon, Shield01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
 import type { ReactNode } from 'react';
-import { SceneFrame, Screens, useScene, useStage } from '../case-study/_scene';
+import { SceneFrame, Screens, useScene, useStage } from '@itspatmorgan/kit/case-study/scene';
 import { Rail, icon } from './_StudioUI';
 import asset0 from '../../assets/images/site/studio-case/logo-dark-mode.svg';
 import asset1 from '../../assets/images/site/studio-case/logo-light-mode.svg';

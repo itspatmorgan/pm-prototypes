@@ -2,7 +2,7 @@ import {
   ArrowDown01Icon, ArrowRight01Icon, CodeIcon, CursorInWindowIcon, File01Icon, FileEditIcon, Flowchart01Icon,  
   Link01Icon, Message01Icon, MoreHorizontalIcon, PaintBoardIcon, PlusSignIcon, Presentation01Icon, Search01Icon, Shapes01Icon,
 } from '@hugeicons/core-free-icons';
-import { Pointer, SceneFrame, Screens, useScene, useStage, useTargets } from '../case-study/_scene';
+import { Pointer, SceneFrame, Screens, useScene, useStage, useTargets } from '@itspatmorgan/kit/case-study/scene';
 import { OsRail, icon } from './_StudioUI';
 
 // The open-source Studio, rebuilt from scratch (itspatmorgan/design-studio). Its home (platform/app/pages/home) lists the latest

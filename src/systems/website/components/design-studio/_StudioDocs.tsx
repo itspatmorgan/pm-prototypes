@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react';
 import type { ReactNode } from 'react';
-import { DemoFrame, SceneFrame, Screens, useScene, useStage } from '../case-study/_scene';
-import { NativeStage } from '../case-study/_NativeStage';
+import { DemoFrame, SceneFrame, Screens, useScene, useStage } from '@itspatmorgan/kit/case-study/scene';
+import { NativeStage } from '@itspatmorgan/kit/case-study/NativeStage';
 import { OsRail } from '../studio-case/_StudioUI';
 import { Doc, Nav } from './_StudioShapes';
 

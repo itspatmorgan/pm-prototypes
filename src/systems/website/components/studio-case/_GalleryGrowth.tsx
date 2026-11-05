@@ -1,7 +1,7 @@
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowDown01Icon, DashboardSquare01Icon, File01Icon, Menu01Icon, SquareIcon } from '@hugeicons/core-free-icons';
 import { motion, useReducedMotion } from 'motion/react';
-import { SceneFrame, Screens, useScene, useStage } from '../case-study/_scene';
+import { SceneFrame, Screens, useScene, useStage } from '@itspatmorgan/kit/case-study/scene';
 import { Filters, PrototypeCard, Rail, icon, type Prototype } from './_StudioUI';
 import asset0 from '../../assets/images/site/studio-case/logo-dark-mode.svg';
 import asset1 from '../../assets/images/site/studio-case/logo-light-mode.svg';

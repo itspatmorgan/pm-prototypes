@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { cn } from '#studio/runtime';
 import { SiteLink } from '../site-shell';
 import { Badge } from '../badge';
-import SublimeCard from '../sublime/_SublimeCard';
+import SublimeCard from '@itspatmorgan/kit/sublime/SublimeCard';
 import QueryCard from '../query-builder/_QueryCard';
 import ExpansionCard from '../expansion/_ExpansionCard';
 import StudioCard from '../design-studio/_StudioCard';

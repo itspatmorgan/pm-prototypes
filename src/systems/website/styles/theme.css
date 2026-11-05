@@ -2,9 +2,9 @@
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 /* Case study scenes and product demos, ported from the site's component stylesheets (styles/site/). */
-@import "./site/case-study.css";
-@import "./site/project-card.css";
-@import "./site/sublime.css";
+@import "@itspatmorgan/kit/studio/case-study.css";
+@import "@itspatmorgan/kit/studio/project-card.css";
+@import "@itspatmorgan/kit/studio/sublime.css";
 @import "./site/query-builder.css";
 @import "./site/expansion.css";
 @import "./site/linework.css";
