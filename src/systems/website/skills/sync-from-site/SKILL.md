@@ -19,6 +19,10 @@ The scene player, every case study and Design Studio demo, and the theme hooks c
 
 The pieces still ported by hand are the site's Astro components rewritten in React (`StudioQuote`, `StudioPress`, `StudioLesson`, the shared site pieces) and page-level stylesheets such as `styles/site/ds-landing.css`. For a changed page stylesheet, run `node scripts/sync-from-site/scope-css.mjs <site css> styles/site/<name>.css`. It scopes every selector to `.website-theme`, maps `.dark` to the theme boundary's dark mode, prefixes keyframes, and wraps sibling selectors in `:is()` for Studio's scope check. Then run `pnpm check` and the TypeScript build.
 
+## Tokens
+
+After moving the kit pin, run `node scripts/sync-from-site/tokens.mjs`. It copies the site's color, radius, and motion tokens from the kit into `styles/theme.css`, light and dark, and leaves the rest of the file alone. `--check` reports drift without writing.
+
 ## Verify
 
 Open the changed pages in the itspatmorgan.com prototype in light and dark and at 390px. Compare them with the live site, and record new adaptations in the library record.
