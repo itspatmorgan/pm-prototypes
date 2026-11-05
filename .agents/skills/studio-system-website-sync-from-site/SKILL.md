@@ -1,6 +1,6 @@
 ---
 name: studio-system-website-sync-from-site
-description: "Refresh the Website system and the itspatmorgan.com prototype from the live site's repository: content, case study demos, and their styles. Use when the site has changed and the workspace should catch up."
+description: "Refresh the Website system and the itspatmorgan.com prototype from the live site's repository: content, the shared kit pin, and page styles. Use when the site has changed and the workspace should catch up."
 ---
 
 <!-- studio:generated-skill -->
