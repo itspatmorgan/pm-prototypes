@@ -363,8 +363,8 @@ importers:
         specifier: 1.1.9
         version: 1.1.9(react@19.3.0)
       '@itspatmorgan/kit':
-        specifier: github:itspatmorgan/itspatmorgan.com#8e3f629c49405ea0420303bd86bb8bbb3b9d550e&path:/packages/kit
-        version: https://codeload.github.com/itspatmorgan/itspatmorgan.com/tar.gz/8e3f629c49405ea0420303bd86bb8bbb3b9d550e#path:/packages/kit(@fontsource/comic-neue@5.3.0)(@fontsource/ibm-plex-mono@5.3.0)(@hugeicons/core-free-icons@4.2.3)(@hugeicons/react@1.1.9(react@19.3.0))(motion@12.43.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
+        specifier: github:itspatmorgan/itspatmorgan.com#e56fd46a3e4c561517d5518f918133b0a7da5ff9&path:/packages/kit
+        version: https://codeload.github.com/itspatmorgan/itspatmorgan.com/tar.gz/e56fd46a3e4c561517d5518f918133b0a7da5ff9#path:/packages/kit(@fontsource/comic-neue@5.3.0)(@fontsource/ibm-plex-mono@5.3.0)(@hugeicons/core-free-icons@4.2.3)(@hugeicons/react@1.1.9(react@19.3.0))(motion@12.43.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -744,8 +744,8 @@ packages:
   '@iconify/utils@3.1.7':
     resolution: {integrity: sha512-JZHlwdID+dy+lTgbYC8NEC4zeugqeYsc6jewvzb4c58kHauJn+X7rNwQjxz5p2qSjqaEeQoLkCIQ9v/H4PK0/w==}
 
-  '@itspatmorgan/kit@https://codeload.github.com/itspatmorgan/itspatmorgan.com/tar.gz/8e3f629c49405ea0420303bd86bb8bbb3b9d550e#path:/packages/kit':
-    resolution: {gitHosted: true, integrity: sha512-ddL0lWnO5jmX/6WtapQ6fP7Z9rMdP3JSzIB2db8CsHBiCDVztV1yY7a7NnyTjbQUrRNqrhdecEXCXUgdnzysvA==, path: /packages/kit, tarball: https://codeload.github.com/itspatmorgan/itspatmorgan.com/tar.gz/8e3f629c49405ea0420303bd86bb8bbb3b9d550e}
+  '@itspatmorgan/kit@https://codeload.github.com/itspatmorgan/itspatmorgan.com/tar.gz/e56fd46a3e4c561517d5518f918133b0a7da5ff9#path:/packages/kit':
+    resolution: {gitHosted: true, integrity: sha512-K0Kkq9415xE3nM02o+ktvI8XXP9o5bg4bhXT+pbdJKmZIiM8rxT0KnR00iehypYf0nMSCDVjpXppwTKkbQ/TWQ==, path: /packages/kit, tarball: https://codeload.github.com/itspatmorgan/itspatmorgan.com/tar.gz/e56fd46a3e4c561517d5518f918133b0a7da5ff9}
     version: 0.0.0
     peerDependencies:
       '@fontsource/comic-neue': ^5.0.0
@@ -4827,7 +4827,7 @@ snapshots:
       '@iconify/types': 2.0.0
       import-meta-resolve: 4.2.0
 
-  '@itspatmorgan/kit@https://codeload.github.com/itspatmorgan/itspatmorgan.com/tar.gz/8e3f629c49405ea0420303bd86bb8bbb3b9d550e#path:/packages/kit(@fontsource/comic-neue@5.3.0)(@fontsource/ibm-plex-mono@5.3.0)(@hugeicons/core-free-icons@4.2.3)(@hugeicons/react@1.1.9(react@19.3.0))(motion@12.43.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)':
+  '@itspatmorgan/kit@https://codeload.github.com/itspatmorgan/itspatmorgan.com/tar.gz/e56fd46a3e4c561517d5518f918133b0a7da5ff9#path:/packages/kit(@fontsource/comic-neue@5.3.0)(@fontsource/ibm-plex-mono@5.3.0)(@hugeicons/core-free-icons@4.2.3)(@hugeicons/react@1.1.9(react@19.3.0))(motion@12.43.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)':
     dependencies:
       '@fontsource/comic-neue': 5.3.0
       '@fontsource/ibm-plex-mono': 5.3.0
