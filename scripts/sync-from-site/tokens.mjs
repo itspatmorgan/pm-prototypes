@@ -39,7 +39,9 @@ for (const selector of SELECTORS) {
 
 if (!drift.length) console.log('theme.css matches the kit tokens.');
 else if (check) {
-  console.error(`theme.css differs from the kit tokens:\n  ${drift.join('\n  ')}\nRun node scripts/sync-from-site/tokens.mjs to update it.`);
+  console.error(
+    `theme.css differs from the kit tokens:\n  ${drift.join('\n  ')}\nRun node scripts/sync-from-site/tokens.mjs to update it.`,
+  );
   process.exit(1);
 } else {
   fs.writeFileSync(THEME, theme.toString());
