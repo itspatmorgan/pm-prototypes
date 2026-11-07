@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
-  "title": "Braille Pixel Marks",
+  "title": "Pixel Mark Generator",
   "created": "2026-11-07",
   "studioId": "5n2hnmvtvew8qd0v",
   "ownerContributorId": "g0t182676p1re4fm",
   "systemId": "v4576ka1mbpbqdp1",
   "order": [
-    "maker.tsx",
+    "generator.tsx",
     "icon-set.tsx",
     "motion.tsx",
     "_components",

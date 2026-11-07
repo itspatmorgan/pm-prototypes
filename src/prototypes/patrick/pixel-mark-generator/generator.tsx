@@ -1,11 +1,11 @@
 /** @studio-id 5k7d858db9jy6286 */
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from '@module/prototypes';
 import { Button } from '@/systems/website/components/button';
 import { brailleString, cellFor, cleanText } from './_components/braille';
 import { Field, PlayIcon, Segmented, Switch } from './_components/controls';
-import { CONTAINERS, DOT_SHAPES, FINISHES, finishById } from './_components/finishes';
+import { CONTAINERS, DEPTHS, DOT_SHAPES, FINISHES, finishById } from './_components/finishes';
 import { Mark } from './_components/Mark';
+import { Nav } from './_components/Nav';
 import { MOTIONS, motionById } from './_components/motion';
 import type { MarkSpec } from './_components/render';
 import { DEFAULTS, loadSettings, saveSettings, type Settings } from './_components/settings';
@@ -23,7 +23,7 @@ function useSettings() {
 
 const pick = <T,>(list: readonly T[]) => list[Math.floor(Math.random() * list.length)];
 
-export default function Maker() {
+export default function Generator() {
   const [s, set, setAll] = useSettings();
   const [playing, setPlaying] = useState(true);
   const [replay, setReplay] = useState(0);
@@ -33,8 +33,8 @@ export default function Maker() {
   const text = cleanText(s.text) || 'p';
   const finish = finishById(s.finish);
   const mark: MarkSpec = useMemo(
-    () => ({ text, finish, dot: s.dot, container: s.container, ghost: s.ghost, layout: s.layout }),
-    [text, finish, s.dot, s.container, s.ghost, s.layout],
+    () => ({ text, finish, dot: s.dot, container: s.container, depth: s.depth, ghost: s.ghost, layout: s.layout }),
+    [text, finish, s.dot, s.container, s.depth, s.ghost, s.layout],
   );
   const card = useMemo(() => ({ format: s.format, backdrop: s.backdrop, caption: s.caption }), [s.format, s.backdrop, s.caption]);
   const motion = motionById(s.motion);
@@ -42,14 +42,22 @@ export default function Maker() {
   const single = [...text].length === 1;
 
   const surprise = () =>
-    setAll(prev => ({
+    setAll(prev => {
+      const next = pick(FINISHES);
+      return {
       ...prev,
-      finish: pick(FINISHES).id,
+      finish: next.id,
+      depth: next.depth ?? pick(DEPTHS).id,
       dot: pick(DOT_SHAPES).id,
       container: pick(CONTAINERS.filter(c => c.id !== 'none')).id,
       ghost: Math.random() < 0.4,
       motion: pick(MOTIONS.filter(m => m.id !== 'still')).id,
-    }));
+      };
+    });
+
+  // A finish made for a depth brings it along, so Tactile's cream dots never arrive flat and invisible.
+  const chooseFinish = (id: string) => setAll(prev => ({ ...prev, finish: id, depth: finishById(id).depth ?? prev.depth }));
+  const depthNote = DEPTHS.find(d => d.id === s.depth)?.note;
 
   const run = async (label: string, job: () => Promise<void>) => {
     setBusy(label);
@@ -75,22 +83,13 @@ export default function Maker() {
   return (
     <div className="min-h-full bg-background text-foreground">
       <header className="mx-auto max-w-5xl px-6 pt-12 pb-10 sm:pt-16">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-xl">
-            <h1 className="mb-3 text-4xl font-medium tracking-tight">Braille Pixel Marks</h1>
-            <p className="text-lg text-muted-foreground">
-              Type a few letters and each becomes a braille cell, drawn with the site’s four-pixel mark. Style it like an app icon, set it moving, and
-              take it with you.
-            </p>
-          </div>
-          <nav className="flex gap-4 font-mono text-sm text-muted-foreground">
-            <Link to="icon-set" className="transition-colors hover:text-foreground">
-              Icon set
-            </Link>
-            <Link to="motion" className="transition-colors hover:text-foreground">
-              Motion
-            </Link>
-          </nav>
+        <Nav current="generator" />
+        <div className="max-w-xl">
+          <h1 className="mb-3 text-4xl font-medium tracking-tight">Pixel Mark Generator</h1>
+          <p className="text-lg text-muted-foreground">
+            Type a few letters and turn them into pixel marks you can style like an app icon, set moving and share. It’s inspired by the braille
+            alphabet: each letter is a braille cell, drawn with the four pixels of the site’s mark.
+          </p>
         </div>
       </header>
 
@@ -185,11 +184,16 @@ export default function Maker() {
                 <span className="text-xs text-muted-foreground">{group === 'plain' ? 'Plain' : 'Bold'}</span>
                 <div className="grid grid-cols-5 gap-2 sm:grid-cols-7 lg:grid-cols-5 xl:grid-cols-7">
                   {FINISHES.filter(f => f.group === group).map(f => (
-                    <FinishSwatch key={f.id} mark={mark} finishId={f.id} name={f.name} selected={f.id === finish.id} onSelect={() => set('finish', f.id)} />
+                    <FinishSwatch key={f.id} mark={mark} finishId={f.id} name={f.name} selected={f.id === finish.id} onSelect={() => chooseFinish(f.id)} />
                   ))}
                 </div>
               </div>
             ))}
+          </Field>
+
+          <Field label="Depth">
+            <Segmented label="Depth" value={s.depth} options={DEPTHS} onChange={v => set('depth', v)} />
+            {depthNote && <p className="text-xs text-muted-foreground">{depthNote}</p>}
           </Field>
 
           <div className="grid gap-6">
@@ -252,7 +256,10 @@ export default function Maker() {
 }
 
 function FinishSwatch({ mark, finishId, name, selected, onSelect }: { mark: MarkSpec; finishId: string; name: string; selected: boolean; onSelect: () => void }) {
-  const spec = useMemo(() => ({ ...mark, text: [...mark.text][0] ?? 'p', layout: 'tile' as const, finish: finishById(finishId) }), [mark, finishId]);
+  const spec = useMemo(() => {
+    const finish = finishById(finishId);
+    return { ...mark, text: [...mark.text][0] ?? 'p', layout: 'tile' as const, finish, depth: finish.depth ?? mark.depth };
+  }, [mark, finishId]);
   return (
     <button
       type="button"

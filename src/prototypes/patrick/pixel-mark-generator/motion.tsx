@@ -1,11 +1,12 @@
 /** @studio-id 678vjx9adq67sdtn */
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Link, useNavigate } from '@module/prototypes';
+import { useNavigate } from '@module/prototypes';
 import { ALPHABET, brailleChar, cellFor } from './_components/braille';
 import { PlayIcon } from './_components/controls';
 import { finishById } from './_components/finishes';
 import { FoldMark, Mark, useReducedMotion } from './_components/Mark';
 import { MOTIONS, type MotionId } from './_components/motion';
+import { Nav } from './_components/Nav';
 import type { MarkSpec } from './_components/render';
 import { saveSettings } from './_components/settings';
 
@@ -24,12 +25,7 @@ export default function Motion() {
   return (
     <div className="min-h-full bg-background text-foreground">
       <header className="mx-auto max-w-3xl px-6 pt-12 pb-12 sm:pt-16">
-        <Link to="maker" className="mb-8 inline-flex items-center gap-1 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground">
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Maker
-        </Link>
+        <Nav current="motion" />
         <h1 className="mb-4 text-4xl font-medium tracking-tight">Motion</h1>
         <p className="max-w-xl text-lg text-muted-foreground">
           Six dots are enough to move with. The mark can fold away, spin while something loads, and settle back into a letter.
@@ -103,7 +99,7 @@ function MotionCard({ motion, name, note }: { motion: MotionId; name: string; no
           type="button"
           onClick={() => {
             saveSettings({ motion, text: spec.text });
-            navigate('maker');
+            navigate('generator');
           }}
           className="text-sm font-medium text-foreground transition-colors hover:text-accent"
         >

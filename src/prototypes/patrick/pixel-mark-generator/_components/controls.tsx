@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { cn } from '#studio/runtime';
 
-// Small controls for the maker, drawn with Website's tokens.
+// Small controls for the generator, drawn with Website's tokens.
 
 export function Field({ label, hint, children }: { label: string; hint?: ReactNode; children: ReactNode }) {
   return (

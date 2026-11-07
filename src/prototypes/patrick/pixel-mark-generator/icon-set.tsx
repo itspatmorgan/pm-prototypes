@@ -1,15 +1,16 @@
 /** @studio-id zkbdcbmn14z8sez4 */
 import { useMemo, useState } from 'react';
-import { Link, useNavigate } from '@module/prototypes';
+import { useNavigate } from '@module/prototypes';
 import { Button } from '@/systems/website/components/button';
 import { ALPHABET, brailleChar, cellFor } from './_components/braille';
-import { CONTAINERS, DOT_SHAPES, FINISHES, finishById, type Container, type DotShape } from './_components/finishes';
+import { CONTAINERS, DEPTHS, DOT_SHAPES, FINISHES, finishById, type Container, type Depth, type DotShape } from './_components/finishes';
 import { Mark } from './_components/Mark';
+import { Nav } from './_components/Nav';
 import { MOTIONS, type MotionId } from './_components/motion';
 import type { MarkSpec } from './_components/render';
 import { saveSettings } from './_components/settings';
 
-type Icon = { letter: string; finish: string; dot: DotShape; container: Container; ghost: boolean; motion: MotionId };
+type Icon = { letter: string; finish: string; dot: DotShape; container: Container; depth: Depth; ghost: boolean; motion: MotionId };
 
 const MOVING = MOTIONS.filter(m => m.id !== 'still').map(m => m.id);
 
@@ -22,21 +23,26 @@ function mix(seed: number, letters: string[], mode: 'mixed' | 'plain' | 'bold'):
   };
   const pool = FINISHES.filter(f => mode === 'mixed' || f.group === mode);
   const dots: DotShape[] = mode === 'plain' ? ['pixel'] : DOT_SHAPES.map(d => d.id);
-  return letters.map((letter, i) => ({
-    letter,
-    finish: pool[(i + Math.floor(rand() * pool.length)) % pool.length].id,
-    dot: letter === 'p' ? 'pixel' : dots[Math.floor(rand() * dots.length)],
-    container: mode === 'plain' ? 'rounded' : (['rounded', 'squircle', 'squircle', 'circle'] as Container[])[Math.floor(rand() * 4)],
-    ghost: rand() < 0.3,
-    motion: MOVING[Math.floor(rand() * MOVING.length)],
-  }));
+  return letters.map((letter, i) => {
+    const finish = pool[(i + Math.floor(rand() * pool.length)) % pool.length];
+    const raised = rand() < 0.4;
+    return {
+      letter,
+      finish: finish.id,
+      dot: letter === 'p' ? 'pixel' : dots[Math.floor(rand() * dots.length)],
+      container: mode === 'plain' ? 'rounded' : (['rounded', 'squircle', 'squircle', 'circle'] as Container[])[Math.floor(rand() * 4)],
+      depth: finish.depth ?? (mode !== 'plain' && raised ? 'raised' : 'flat'),
+      ghost: rand() < 0.3,
+      motion: MOVING[Math.floor(rand() * MOVING.length)],
+    };
+  });
 }
 
 const HOME = ALPHABET.filter(l => !'pmua'.includes(l));
 const DOCK = ['p', 'm', 'u', 'a'];
 
 function specOf(icon: Icon): MarkSpec {
-  return { text: icon.letter, finish: finishById(icon.finish), dot: icon.dot, container: icon.container, ghost: icon.ghost, layout: 'tile' };
+  return { text: icon.letter, finish: finishById(icon.finish), dot: icon.dot, container: icon.container, depth: icon.depth, ghost: icon.ghost, layout: 'tile' };
 }
 
 function AppIcon({ icon, label, onOpen }: { icon: Icon; label?: boolean; onOpen: (icon: Icon) => void }) {
@@ -50,7 +56,7 @@ function AppIcon({ icon, label, onOpen }: { icon: Icon; label?: boolean; onOpen:
       onMouseLeave={() => setHover(false)}
       onFocus={() => setHover(true)}
       onBlur={() => setHover(false)}
-      aria-label={`Open ${icon.letter.toUpperCase()} in the maker`}
+      aria-label={`Open ${icon.letter.toUpperCase()} in the generator`}
       className="group flex min-w-0 flex-col items-center gap-1 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-white/70"
     >
       <Mark
@@ -72,23 +78,18 @@ export default function IconSet() {
   const dock = useMemo(() => mix(seed + 17, DOCK, mode), [seed, mode]);
 
   const open = (icon: Icon) => {
-    saveSettings({ text: icon.letter, finish: icon.finish, dot: icon.dot, container: icon.container, ghost: icon.ghost, motion: icon.motion, layout: 'tile' });
-    navigate('maker');
+    saveSettings({ text: icon.letter, finish: icon.finish, dot: icon.dot, container: icon.container, depth: icon.depth, ghost: icon.ghost, motion: icon.motion, layout: 'tile' });
+    navigate('generator');
   };
 
   return (
     <div className="min-h-full bg-background text-foreground">
       <header className="mx-auto max-w-5xl px-6 pt-12 pb-10 sm:pt-16">
-        <Link to="maker" className="mb-8 inline-flex items-center gap-1 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground">
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Maker
-        </Link>
+        <Nav current="icon-set" />
         <h1 className="mb-3 text-4xl font-medium tracking-tight">Icon set</h1>
         <p className="max-w-xl text-lg text-muted-foreground">
-          The alphabet as a home screen. Every icon is a braille letter in the site’s pixels, styled its own way. Hover one to see it move, or open it in
-          the maker.
+          The alphabet as a home screen. Every icon is a braille letter in the site’s pixels, styled its own way. Hover one to see it move, or click it to open
+          it in the generator.
         </p>
       </header>
 
@@ -166,6 +167,25 @@ export default function IconSet() {
         </section>
 
         <section className="border-t border-border pt-16">
+          <h2 className="mb-2 text-base font-semibold tracking-tight">Depth</h2>
+          <p className="mb-10 max-w-xl text-sm text-muted-foreground">
+            Braille is read by touch. Raised lifts each dot off the tile while the unraised ones stay flat, as on a page. Pressed is the back of the
+            page, where every dot is a dent.
+          </p>
+          <div className="grid grid-cols-[auto_repeat(3,minmax(0,1fr))] items-center gap-x-4 gap-y-6 sm:gap-x-8">
+            <span />
+            {DEPTHS.map(d => (
+              <span key={d.id} className="text-center text-sm font-medium text-muted-foreground">
+                {d.name}
+              </span>
+            ))}
+            {['ink', 'gold', 'sunset', 'tactile'].map(id => (
+              <DepthRow key={id} finishId={id} onOpen={open} />
+            ))}
+          </div>
+        </section>
+
+        <section className="border-t border-border pt-16">
           <h2 className="mb-2 text-base font-semibold tracking-tight">Pixels and containers</h2>
           <p className="mb-10 max-w-xl text-sm text-muted-foreground">Four pixel shapes in four containers. Pixel in Rounded is the mark on the site today.</p>
           <div className="grid grid-cols-[auto_repeat(4,minmax(0,1fr))] items-center gap-x-4 gap-y-6 sm:gap-x-8">
@@ -186,7 +206,9 @@ export default function IconSet() {
 }
 
 function FinishTile({ finishId, name, onOpen }: { finishId: string; name: string; onOpen: (icon: Icon) => void }) {
-  const icon = useMemo<Icon>(() => ({ letter: 'p', finish: finishId, dot: 'pixel', container: 'rounded', ghost: false, motion: 'pulse' }), [finishId]);
+  const icon = useMemo<Icon>(() => ({ letter: 'p', finish: finishId, dot: 'pixel', container: 'rounded', depth: finishById(finishId).depth ?? 'flat', ghost: false, motion: 'pulse' }),
+    [finishId],
+  );
   const [hover, setHover] = useState(false);
   const spec = useMemo(() => specOf(icon), [icon]);
   return (
@@ -215,6 +237,29 @@ function ShapeRow({ dot, name }: { dot: DotShape; name: string }) {
           />
         </div>
       ))}
+    </>
+  );
+}
+
+function DepthRow({ finishId, onOpen }: { finishId: string; onOpen: (icon: Icon) => void }) {
+  const finish = finishById(finishId);
+  return (
+    <>
+      <span className="text-sm font-medium text-muted-foreground">{finish.name}</span>
+      {DEPTHS.map(d => {
+        const icon: Icon = { letter: 'p', finish: finishId, dot: 'soft', container: 'squircle', depth: d.id, ghost: true, motion: 'pulse' };
+        return (
+          <button
+            key={d.id}
+            type="button"
+            aria-label={`Open ${finish.name}, ${d.name.toLowerCase()}, in the generator`}
+            onClick={() => onOpen(icon)}
+            className="flex justify-center rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <Mark spec={specOf(icon)} className="w-full max-w-20" />
+          </button>
+        );
+      })}
     </>
   );
 }

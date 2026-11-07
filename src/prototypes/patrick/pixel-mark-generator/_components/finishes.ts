@@ -5,7 +5,7 @@
 export type Stop = [offset: number, color: string];
 export type Paint = string | { kind: 'linear'; angle: number; stops: Stop[] } | { kind: 'radial'; cx: number; cy: number; r: number; stops: Stop[] };
 
-export type Effect = 'none' | 'grain' | 'glow' | 'emboss' | 'grid' | 'riso' | 'gloss';
+export type Effect = 'none' | 'grain' | 'glow' | 'grid' | 'riso' | 'gloss';
 
 export type Finish = {
   id: string;
@@ -28,6 +28,8 @@ export type Finish = {
   stage: string;
   /** Caption color on that backdrop. */
   stageInk: string;
+  /** The depth this finish is made for, chosen with it. Tactile’s cream dots disappear when flat. */
+  depth?: Depth;
 };
 
 // Site palette (itspatmorgan.com theme tokens, converted from OKLCH).
@@ -106,11 +108,13 @@ export const FINISHES: Finish[] = [
     name: 'Tactile',
     group: 'bold',
     background: { kind: 'linear', angle: 160, stops: [[0, '#f8f4ed'], [1, '#e9e2d6']] },
-    dot: { kind: 'radial', cx: 0.35, cy: 0.3, r: 0.9, stops: [[0, '#fffdf9'], [1, '#e7dfd2']] },
+    // Cream on cream, like a braille page: the dots carry no ink, so only their depth shows them.
+    dot: '#f6f1e9',
     ghost: 'rgba(120, 96, 70, 0.10)',
-    effect: 'emboss',
+    effect: 'none',
     stage: '#e4ddd1',
     stageInk: '#3a3027',
+    depth: 'raised',
   },
   {
     id: 'sunset',
@@ -202,6 +206,14 @@ export const DOT_SHAPES: { id: DotShape; name: string }[] = [
   { id: 'soft', name: 'Soft' },
   { id: 'round', name: 'Round' },
   { id: 'ring', name: 'Ring' },
+];
+
+/** How the dots sit on the surface. Braille is read by touch, so the dots can stand up off the tile or press into it. */
+export type Depth = 'flat' | 'raised' | 'pressed';
+export const DEPTHS: { id: Depth; name: string; note: string }[] = [
+  { id: 'flat', name: 'Flat', note: 'Printed flat, like the site’s mark.' },
+  { id: 'raised', name: 'Raised', note: 'Each dot stands up off the tile and catches the light, the way braille does on paper.' },
+  { id: 'pressed', name: 'Pressed', note: 'Each dot is a dent, like the back of a braille page.' },
 ];
 
 export type Container = 'rounded' | 'squircle' | 'circle' | 'none';

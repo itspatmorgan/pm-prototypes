@@ -1,6 +1,6 @@
 // Draws a mark as an SVG string. The live view, the thumbnails and every export use this one renderer.
 import { ALL_DOTS, CELL_PITCH, PITCH, PIXEL, TILE, cellFor, dotSlot, type Dot } from './braille';
-import type { Container, DotShape, Finish, Paint } from './finishes';
+import type { Container, Depth, DotShape, Finish, Paint } from './finishes';
 import type { Frame } from './motion';
 
 export type Layout = 'tile' | 'lockup';
@@ -12,6 +12,8 @@ export type MarkSpec = {
   container: Container;
   ghost: boolean;
   layout: Layout;
+  /** Flat when left out. Only the raised dots take depth; the unraised ones stay flat, as on a braille page. */
+  depth?: Depth;
 };
 
 export function cellsOf(text: string): Dot[][] {
@@ -166,22 +168,35 @@ export function renderMark(spec: MarkSpec, frame: Frame, { id, width, title }: R
       .join('');
 
   const dotFill = paintRef(`${id}-dot`, finish.dot);
+  const depth = spec.depth ?? 'flat';
+  // A raised dot casts a soft shadow onto the tile. The highlight and shade below are drawn per dot, so they keep their look at any size.
+  if (depth === 'raised') {
+    defs.push(
+      `<filter id="${id}-lift" x="-60%" y="-60%" width="220%" height="240%"><feGaussianBlur in="SourceAlpha" stdDeviation="${f(0.5 * scale)}"/><feOffset dy="${f(0.75 * scale)}" result="s"/><feFlood flood-color="#000" flood-opacity="0.42"/><feComposite in2="s" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>`,
+    );
+  }
+  const lift = (inner: string) => (depth === 'raised' ? `<g filter="url(#${id}-lift)">${inner}</g>` : inner);
   if (finish.effect === 'riso') {
     // Two inks printed slightly out of register, the way a risograph lays down a second drum.
-    layers.push(`<g style="mix-blend-mode:multiply" opacity="0.85">${dots(finish.effectColor ?? '#ff48b0', -0.85, -0.55)}</g>`);
-    layers.push(`<g style="mix-blend-mode:multiply" opacity="0.82">${dots(dotFill, 0.45, 0.3)}</g>`);
+    layers.push(lift(`<g style="mix-blend-mode:multiply" opacity="0.85">${dots(finish.effectColor ?? '#ff48b0', -0.85, -0.55)}</g>`));
+    layers.push(lift(`<g style="mix-blend-mode:multiply" opacity="0.82">${dots(dotFill, 0.45, 0.3)}</g>`));
   } else if (finish.effect === 'glow') {
     defs.push(
       `<filter id="${id}-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur in="SourceGraphic" stdDeviation="${f(1.5 * scale)}" result="wide"/><feGaussianBlur in="SourceGraphic" stdDeviation="${f(0.45 * scale)}" result="tight"/><feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`,
     );
-    layers.push(`<g filter="url(#${id}-glow)">${dots(dotFill)}</g>`);
-  } else if (finish.effect === 'emboss') {
-    defs.push(
-      `<filter id="${id}-emboss" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="${f(0.42 * scale)}" result="b"/><feOffset in="b" dx="${f(0.42 * scale)}" dy="${f(0.62 * scale)}" result="o1"/><feFlood flood-color="#4a3420" flood-opacity="0.34"/><feComposite in2="o1" operator="in" result="shade"/><feOffset in="b" dx="${f(-0.32 * scale)}" dy="${f(-0.38 * scale)}" result="o2"/><feFlood flood-color="#ffffff" flood-opacity="0.95"/><feComposite in2="o2" operator="in" result="light"/><feMerge><feMergeNode in="shade"/><feMergeNode in="light"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`,
-    );
-    layers.push(`<g filter="url(#${id}-emboss)">${dots(dotFill)}</g>`);
+    layers.push(lift(`<g filter="url(#${id}-glow)">${dots(dotFill)}</g>`));
   } else {
-    layers.push(`<g>${dots(dotFill)}</g>`);
+    layers.push(lift(`<g>${dots(dotFill)}</g>`));
+  }
+
+  // Light from the top left: a highlight and a shade over each dot, swapped when the dot is pressed in.
+  if (depth !== 'flat') {
+    const up = depth === 'raised';
+    defs.push(
+      `<radialGradient id="${id}-hi" cx="${up ? 0.32 : 0.62}" cy="${up ? 0.26 : 0.78}" r="${up ? 0.62 : 0.55}"><stop offset="0" stop-color="#fff" stop-opacity="${up ? 0.62 : 0.3}"/><stop offset="0.55" stop-color="#fff" stop-opacity="${up ? 0.12 : 0.06}"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`,
+      `<linearGradient id="${id}-shade" x1="0" y1="${up ? 0 : 1}" x2="0" y2="${up ? 1 : 0}"><stop offset="${up ? 0.45 : 0.4}" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="${up ? 0.34 : 0.5}"/></linearGradient>`,
+    );
+    layers.push(`<g>${dots(`url(#${id}-shade)`)}${dots(`url(#${id}-hi)`)}</g>`);
   }
 
   if (boxed && finish.effect === 'gloss') {
