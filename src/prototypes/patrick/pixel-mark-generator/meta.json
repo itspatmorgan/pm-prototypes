@@ -1,0 +1,15 @@
+{
+  "formatVersion": 1,
+  "title": "Pixel Mark Generator",
+  "created": "2026-11-07",
+  "studioId": "5n2hnmvtvew8qd0v",
+  "ownerContributorId": "g0t182676p1re4fm",
+  "systemId": "v4576ka1mbpbqdp1",
+  "order": [
+    "generator.tsx",
+    "icon-set.tsx",
+    "motion.tsx",
+    "_components",
+    "meta.json"
+  ]
+}
