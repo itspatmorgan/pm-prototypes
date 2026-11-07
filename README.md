@@ -70,7 +70,7 @@ Private viewing access depends on your host's access controls. Design Studio doe
 
 ### This studio's Cloudflare deployment
 
-This copy publishes to [studio.itspatmorgan.com](https://studio.itspatmorgan.com/) with Cloudflare Workers static assets through Workers Builds connected to this repository. [`wrangler.jsonc`](wrangler.jsonc) uploads `dist/` with single-page-app fallback so direct prototype links reload correctly, and [`public/_headers`](public/_headers) sets the cache policy from the publishing contract. In the Worker's build settings, use `pnpm build` as the build command, `npx wrangler deploy` as the deploy command, and set `NODE_VERSION=24`. Set `STUDIO_PUBLIC_URL=https://studio.itspatmorgan.com/` so social previews use absolute image links. Pushes to `main` publish automatically.
+This copy publishes to [studio.itspatmorgan.com](https://studio.itspatmorgan.com/) with Cloudflare Workers static assets through Workers Builds connected to this repository. [`wrangler.jsonc`](wrangler.jsonc) uploads `dist/` with single-page-app fallback so direct prototype links reload correctly, and [`public/_headers`](public/_headers) sets the cache policy from the publishing contract. In the Worker's build settings, use `pnpm build` as the build command, `npx wrangler deploy` as the deploy command, and set `NODE_VERSION=24`. Set `STUDIO_PUBLIC_URL=https://studio.itspatmorgan.com/` so social previews use absolute image links. Pushes to `main` publish automatically. Pull request builds get a Preview URL because `wrangler.jsonc` sets `preview_urls: true`, while `workers_dev: false` keeps the production workers.dev address off.
 
 ## Documentation and feedback
 

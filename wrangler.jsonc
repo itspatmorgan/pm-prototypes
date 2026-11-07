@@ -6,6 +6,11 @@
   "compatibility_date": "2026-10-01",
   // Cloudflare creates the DNS record and certificate on deploy.
   "routes": [{ "pattern": "studio.itspatmorgan.com", "custom_domain": true }],
+  // Keep the production workers.dev URL off, but give every uploaded version
+  // (each pull request build) its own Preview URL. Both are explicit because
+  // each `wrangler deploy` resets the dashboard toggles to match this file.
+  "workers_dev": false,
+  "preview_urls": true,
   "assets": {
     "directory": "./dist",
     // Serve index.html (HTTP 200) for app routes such as direct prototype
