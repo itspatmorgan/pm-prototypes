@@ -208,6 +208,7 @@ test('CSS validation contains exact selector targets, nested rules and imported 
       'body:has(.product-theme) {color:red}',
       '.product-theme-other {color:red}',
       '.product-theme + body {color:red}',
+      '.product-theme ~ .a .b {color:red}',
       '.product-theme { & ~ body {color:red} }',
       '@import "https://example.test/global.css";',
       '@keyframes pulse {from {opacity:0} to {opacity:1}}',
@@ -219,6 +220,8 @@ test('CSS validation contains exact selector targets, nested rules and imported 
       '.product-theme {color:red}',
       '.product-theme[data-color-mode="dark"] button {color:red}',
       '.product-theme { &:hover {color:red} .child {color:blue} }',
+      '.product-theme .a + .b, .product-theme > .a ~ .b {color:red}',
+      '.product-theme { .a + .b {color:red} }',
       '@media (width > 1px) {.product-theme {color:red}}',
       '@font-face {font-family:Example;src:url(example.woff2)}',
     ])
@@ -361,8 +364,9 @@ test('utility diagnostics distinguish omitted tokens from unrelated text', async
       inventory: themeInventory('.example-theme { --shadow-sm: 0 1px black; }', 'example-theme'),
     };
     const problems = await themeUsageProblems([system], () => [file]);
-    assert.equal(problems.length, 1);
+    assert.equal(problems.length, 2);
     assert.match(problems[0], /shadow-lg requires --shadow-lg/);
+    assert.match(problems[1], /missing 1 token\(s\) in all: --shadow-lg \(Tailwind default /);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

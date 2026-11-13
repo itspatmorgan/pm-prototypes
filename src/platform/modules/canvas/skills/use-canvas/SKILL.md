@@ -9,8 +9,8 @@ This skill applies when Canvases is enabled. The [module README](../../README.md
 
 - Keep embedded artifacts within the canvas's own prototype. Copy another prototype's artifact before embedding it.
 - Do not store images in a canvas. Embed the working view instead.
-- Apply the [contributor scope](../../../../context/contributor-scope.md) before editing.
-- Prefer native Excalidraw tools for canvas composition: text for annotations, with shapes, lines, arrows, and frames as needed. Use library assets when they serve the requested design; the example sticky note demonstrates extending the library and is optional, not the default for screen annotations.
+- Prefer native Excalidraw tools for canvas composition: text for annotations, with shapes, lines, arrows, and frames as needed. Sticky notes (the `note` kind, Excalidraw's `stickynote`) are optional, not the default for screen annotations.
+- To draw a flowchart, sequence, class, state or ER diagram as shapes the person can rearrange, use the `mermaid` tool. For a diagram that stays Mermaid, make a diagram artifact and embed it instead.
 - Inspect the current scene before changing it. Inspect the result afterward.
 - Preserve the person's arrangements. Move existing content only when the request requires it.
 - Keep changes small enough to review and undo. Live tool operations support undo. External file edits may not be separate undo steps.
@@ -34,7 +34,7 @@ Prefer tools over manual JSON edits. They maintain element bindings and versions
 
 Canvas tools edit existing scenes. Create a canvas through the file menu, or use the empty-scene `template` from this module's [file-type declaration](../../type.ts) for direct authoring.
 
-For new directly authored artifacts, preview and apply [identity assignment](../../../../context/resource-identity.md#direct-authoring-and-verification). Preserve existing identity metadata when editing.
+For new directly authored artifacts, preview and apply [identity assignment](../../../../context/maintainers/resource-identity.md#direct-authoring-and-verification). Preserve existing identity metadata when editing.
 
 ## Verify
 
