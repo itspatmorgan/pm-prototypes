@@ -38,7 +38,7 @@ The starter Product and Marketing systems use shadcn/ui on Base UI. Shadcn-based
 
 Studio follows the global mode. Rendered views, their document/canvas embeds, and Systems theme previews and component examples resolve that mode against their system's capabilities. Unsupported global modes use the first supported mode. Documents, diagrams, canvas chrome, and source editors keep Studio's mode.
 
-The shared `ThemeScope` sets `data-color-mode` and CSS `color-scheme` on the system boundary. Pop-ups stay inside it. Dark tokens use `.<theme-class>[data-color-mode="dark"]`; never use an ancestor `.dark` selector for system styles. Tailwind `dark:` utilities respect a local light boundary. Tailwind systems explicitly declare their theme tokens on the system boundary. Theme and component pages use the selected system's mode, including their background, headings, token tables, and component examples. The shared Overview, navigation, system knowledge, and source editors remain in Studio's scope; optional additional overview content retains the selected system's theme. The Overview’s Toolkit section calls out supported modes using ColorModeSupport, which reads the declaration from system.ts.
+The shared `ThemeScope` sets `data-color-mode` and CSS `color-scheme` on the system boundary. Pop-ups stay inside it. Dark tokens use `.<theme-class>[data-color-mode="dark"]`; never use an ancestor `.dark` selector for system styles. Code that needs the mode, such as canvas art or a theme hook, reads it with `useColorMode()` from `#studio/runtime` rather than watching `.dark` on `<html>`. Tailwind `dark:` utilities respect a local light boundary. Tailwind systems explicitly declare their theme tokens on the system boundary. Theme and component pages use the selected system's mode, including their background, headings, token tables, and component examples. The shared Overview, navigation, system knowledge, and source editors remain in Studio's scope; optional additional overview content retains the selected system's theme. The Overview’s Toolkit section calls out supported modes using ColorModeSupport, which reads the declaration from system.ts.
 
 The starter Product system and new system scaffolds declare both modes. New scaffolds contain an empty theme scope; curation supplies the chosen tokens. For a light-only system such as Sublime, declare `colorModes: ['light']`; for a dark-only system, declare `colorModes: ['dark']`. Its rendered content then keeps that mode regardless of Studio's toggle.
 
@@ -52,7 +52,7 @@ Pop-ups render within the themed container. Starter Base UI portals import `useP
 
 ## Permanent identity and routes
 
-Each installed system declares `studioId` in `system.ts`. Creation and installation allocate it; rename, ordinary updates, archive, and restore retain it. Package source and version remain separate provenance. The browser opens `/systems/<system-id>` and named surfaces such as `/colors`, `/fonts`, `/components/button`, `/context/design`, and `/skills/build-flow/SKILL`. System children have no generated IDs. Source keys and dependency paths remain meaningful; changing them still requires import and reference repair. See [Resource identity](../../context/resource-identity.md) for relationship resolution.
+Each installed system declares `studioId` in `system.ts`. Creation and installation allocate it; rename, ordinary updates, archive, and restore retain it. Package source and version remain separate provenance. The browser opens `/systems/<system-id>` and named surfaces such as `/colors`, `/fonts`, `/components/button`, `/context/design`, and `/skills/build-flow/SKILL`. System children have no generated IDs. Source keys and dependency paths remain meaningful; changing them still requires import and reference repair. See [Resource identity](../../context/maintainers/resource-identity.md) for relationship resolution.
 
 ## Page loading
 
@@ -70,17 +70,17 @@ button/
   button.examples.tsx
 ```
 
-`index.ts` re-exports the component. Flat component files are also discovered.
+`index.ts` re-exports the component, and makes the folder one component: its other files, at any depth, are internal parts with no page of their own, unless one has its own `.md` or examples file. Flat component files are also discovered, and each is its own component page.
 
 The Markdown page has a `title`, `description`, and `## When to use` section. Other sections are optional.
 
-Optional `source` frontmatter supplies a short provenance sentence, such as the library, CLI version, and preset. The compact Source block links the system’s declared origin and libraries whose `components` include this component to their Libraries entries. It preserves the component-specific upstream `docs` link. Label generation versions as shadcn CLI, not as runtime library versions. Keep technical adaptation details in system context.
+Optional `source` frontmatter supplies a short provenance sentence, such as the library, CLI version, and preset. The compact Source block links the libraries whose `components` include this component to their Libraries entries. Credit comes only from those lists, so a component a library does not list is never credited to it. It preserves the component-specific upstream `docs` link. Label generation versions as shadcn CLI, not as runtime library versions. Keep technical adaptation details in system context.
 
 Each capitalized export from the examples file is one live example. The platform frames examples with the system's theme.
 
 Component pages show guidance, then Examples, then Source with the local file path. Props comes last in a disclosure, collapsed initially and labeled with component and documented-prop counts. Props tables come from TypeScript. They summarize inputs rather than replacing upstream API documentation.
 
-`origin: 'shadcn'` adds upstream component links. A Markdown page can provide its own `docs` URL. Declare `origin: null` when replacing the starter kit with another library.
+`origin: 'shadcn'` adds upstream shadcn/ui docs links to the components its shadcn library entry lists. A Markdown page can provide its own `docs` URL. Declare `origin: null` when the system's components no longer come from shadcn/ui.
 
 Missing pages, examples, or required page fields normally produce warnings. `docs: 'strict'` makes these errors. `docs: 'off'` suppresses documentation warnings.
 
@@ -174,7 +174,7 @@ folders in `src/systems/<id>/`, which are your content, plus Studio's own system
 - `pages/`, `data/`: the Systems pages and the loaders behind them (browser).
 - `node/`: finding systems, building their docs and props, and `pnpm component-docs` (Node).
 
-Page loading follows the [shared navigation handoff](../../context/source.md#navigation-handoff). Route loaders prepare the reader and content before replacing the current page.
+Page loading follows the [shared navigation handoff](../../context/maintainers/source.md#navigation-handoff). Route loaders prepare the reader and content before replacing the current page.
 
 ## Local owner routes
 

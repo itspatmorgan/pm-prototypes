@@ -218,7 +218,7 @@ test('rightOf centers by default so arrows between different heights run straigh
   const at = (ref: string) => s.live().find(e => e.id === refs[ref])!;
   assert.equal(at('card').y, (338 - 88) / 2, 'centered on the view');
   assert.equal(at('top').y, 0, 'align: start lines up the tops');
-  assert.equal(at('under').x, at('card').x + (480 - 200) / 2, 'a note centered under a card');
+  assert.equal(at('under').x, at('card').x + (480 - 250) / 2, 'a note centered under a card');
   const arrow = s.live().find(e => e.type === 'arrow')!;
   assert.equal(arrow.points[1][1], 0, 'the arrow is straight');
   assert.throws(() => s.call('create', { type: 'note', text: 'x', below: '@card', align: 'left' }), /align must be/);
@@ -236,6 +236,19 @@ test('create warns when something lands on something else', () => {
   });
   assert.equal(second.warnings.length, 1);
   assert.match(second.warnings[0], /overlaps/);
+});
+
+test('create warns when a call repeats existing content, as a retried command would', () => {
+  const s = session();
+  const call = {
+    elements: [
+      { type: 'note', text: 'Same idea' },
+      { type: 'text', text: 'Heading' },
+    ],
+  };
+  assert.equal(s.call('create', call).warnings, undefined);
+  const again = s.call('create', call);
+  assert.ok(again.warnings.some((w: string) => /repeat existing ones.*delete the new copies/.test(w)));
 });
 
 test('artifacts lists what can go on the canvas, and a wrong name points at it', () => {
@@ -289,27 +302,34 @@ test('moving an artifact to another prototype is refused, and artifacts lists on
 const LONG =
   'A long note. This one has a lot more to say, because the agent was asked to explain a whole flow in a single sticky note, with reasons, edge cases, and a question at the end that nobody has answered yet. Does it fit?';
 
-test('a note stays square when its text fits, and grows taller when it does not', () => {
+test("a note is Excalidraw's sticky note: square when its text fits, a smaller font and then taller when not", () => {
   const s = session();
   s.call('create', {
     elements: [
       { type: 'note', text: 'Short' },
       { type: 'note', text: LONG },
+      { type: 'note', text: `${LONG} ${LONG} ${LONG}` },
     ],
   });
-  const [short, long] = s.live().filter(el => el.type === 'rectangle');
-  assert.equal(short.height, 200);
-  assert.ok(long.height > 200, `a long note is taller (${long.height})`);
-  // Its text fits inside it, with the note's padding.
-  const label = s.live().find(el => el.type === 'text' && el.containerId === long.id)!;
-  assert.ok(label.y + label.height <= long.y + long.height, 'the text ends inside the note');
+  const [short, long, longer] = s.live().filter(el => el.type === 'stickynote');
+  const labelOf = (note: El) => s.live().find(el => el.type === 'text' && el.containerId === note.id)!;
+  assert.equal(short.height, 250);
+  assert.equal(short.baseHeight, 250);
+  assert.equal(labelOf(short).fontSize, 20);
+  assert.equal(long.height, 250, 'a longer text first shrinks its font');
+  assert.ok(labelOf(long).fontSize < 20, `smaller font (${labelOf(long).fontSize})`);
+  assert.equal(labelOf(long).baseFontSize, 20, 'the font it shrinks from is kept');
+  assert.ok(longer.height > 250, `a much longer one is taller (${longer.height})`);
+  assert.equal(longer.baseHeight, 250);
+  const label = labelOf(longer);
+  assert.ok(label.y + label.height <= longer.y + longer.height, 'the text ends inside the note');
 });
 
 test('a note says so when it had to be taller than the height asked for', () => {
   const s = session();
   const out = s.call('create', { elements: [{ type: 'note', text: LONG, height: 120 }] });
   assert.match(out.warnings.join(' '), /made \d+ tall, not 120/);
-  assert.ok(s.live().find(el => el.type === 'rectangle')!.height > 120);
+  assert.ok(s.live().find(el => el.type === 'stickynote')!.height > 120);
 });
 
 test('wrapped text never runs wider than the box it wraps to', () => {
